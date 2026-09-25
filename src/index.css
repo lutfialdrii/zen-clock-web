@@ -15,32 +15,30 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
   font-family: var(--vscode-font-family, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif);
-  display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
-  width: 100vw;
-  overflow: hidden;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 #root {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
 }
 
 .app-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
   position: relative;
-  padding-top: 15px;
+  padding: 20px 10px;
 }
 
 /* Nav Header */
@@ -88,6 +86,19 @@ body {
 .nav-btn.install-btn:hover {
   background-color: rgba(99, 102, 241, 0.28);
   color: #ffffff;
+}
+
+.nav-btn.extension-nav-btn {
+  background-color: rgba(251, 191, 36, 0.12);
+  color: #fbbf24;
+  border: 1px solid rgba(251, 191, 36, 0.28);
+  font-weight: 600;
+}
+
+.nav-btn.extension-nav-btn:hover {
+  background-color: rgba(251, 191, 36, 0.22);
+  color: #fef08a;
+  border-color: rgba(251, 191, 36, 0.45);
 }
 
 .app-content {
