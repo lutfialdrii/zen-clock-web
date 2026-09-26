@@ -2,25 +2,39 @@ import React, { useState, useEffect } from 'react';
 import FlipClock from './components/FlipClock';
 import PrayerTime from './components/PrayerTime';
 import PomodoroTimer from './components/PomodoroTimer';
-import ExtensionLanding from './components/ExtensionLanding';
-import { Timer, Clock, Download, Code } from 'lucide-react';
+import AppsShowcase from './components/showcase/AppsShowcase';
+import { Timer, Clock, Download } from 'lucide-react';
+import { useLanguage } from './utils/i18n';
 import './index.css';
 
-const checkIsExtensionRoute = () => {
-  if (typeof window === 'undefined') return false;
+const resolveCurrentRoute = () => {
+  if (typeof window === 'undefined') return { route: 'app', tab: 'vscode' };
   const path = window.location.pathname.toLowerCase();
   const hash = window.location.hash.toLowerCase();
-  return path.startsWith('/extension') || hash.includes('extension');
+
+  if (path.startsWith('/apps')) {
+    const tab = hash.replace('#', '') || 'vscode';
+    return { route: 'apps', tab };
+  }
+  if (path.startsWith('/extension') || hash.includes('extension')) {
+    return { route: 'apps', tab: 'vscode' };
+  }
+  return { route: 'app', tab: 'vscode' };
 };
 
 function App() {
+  const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState('clock'); // 'clock' | 'pomodoro'
-  const [currentRoute, setCurrentRoute] = useState(checkIsExtensionRoute() ? 'extension' : 'app');
+  const [{ currentRoute, initialShowcaseTab }, setNavState] = useState(() => {
+    const { route, tab } = resolveCurrentRoute();
+    return { currentRoute: route, initialShowcaseTab: tab };
+  });
   const [deferredPrompt, setDeferredPrompt] = useState(null);
 
   useEffect(() => {
     const handlePopState = () => {
-      setCurrentRoute(checkIsExtensionRoute() ? 'extension' : 'app');
+      const { route, tab } = resolveCurrentRoute();
+      setNavState({ currentRoute: route, initialShowcaseTab: tab });
     };
 
     window.addEventListener('popstate', handlePopState);
@@ -55,24 +69,31 @@ function App() {
     }
   };
 
-  const navigateTo = (route) => {
-    setCurrentRoute(route);
-    if (route === 'extension') {
-      window.history.pushState({}, '', '/extension');
+  const navigateTo = (route, tab = 'vscode') => {
+    setNavState({ currentRoute: route, initialShowcaseTab: tab });
+    if (route === 'apps') {
+      window.history.pushState({}, '', `/apps#${tab}`);
     } else {
       window.history.pushState({}, '', '/');
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  if (currentRoute === 'extension') {
-    return <ExtensionLanding onBackToClock={() => navigateTo('app')} />;
+  if (currentRoute === 'apps') {
+    return (
+      <AppsShowcase
+        initialTab={initialShowcaseTab}
+        onBackToClock={() => navigateTo('app')}
+      />
+    );
   }
 
   return (
     <div className="app-container">
+      {/* Distraction-Free Header: Only Clock & Pomodoro Tabs */}
       <div className="app-header-nav">
         <button
+          type="button"
           className={`nav-btn ${activeTab === 'clock' ? 'active' : ''}`}
           onClick={() => setActiveTab('clock')}
           title="Flip Clock & Prayer Times"
@@ -81,6 +102,7 @@ function App() {
           <span>Clock</span>
         </button>
         <button
+          type="button"
           className={`nav-btn ${activeTab === 'pomodoro' ? 'active' : ''}`}
           onClick={() => setActiveTab('pomodoro')}
           title="Pomodoro Timer"
@@ -88,26 +110,20 @@ function App() {
           <Timer size={18} />
           <span>Pomodoro</span>
         </button>
-        <button
-          className="nav-btn extension-nav-btn"
-          onClick={() => navigateTo('extension')}
-          title="VS Code Extension & Marketplace"
-        >
-          <Code size={18} />
-          <span>VS Code Extension</span>
-        </button>
         {deferredPrompt && (
           <button
+            type="button"
             className="nav-btn install-btn"
             onClick={handleInstallClick}
-            title="Install Zen Clock App"
+            title={t.nav?.installPwa || 'Install'}
           >
             <Download size={18} />
-            <span>Install</span>
+            <span>{t.nav?.installPwa || 'Install'}</span>
           </button>
         )}
       </div>
 
+      {/* Main Clock Content */}
       <div className="app-content">
         {activeTab === 'clock' ? (
           <>
@@ -118,6 +134,18 @@ function App() {
           <PomodoroTimer />
         )}
       </div>
+
+      {/* Subtle, Non-Intrusive Bottom Dock to Explore Other Apps */}
+      <footer className="zen-dock-footer">
+        <button
+          type="button"
+          className="zen-dock-link"
+          onClick={() => navigateTo('apps', 'vscode')}
+          title="Explore Zen Clock Apps"
+        >
+          <span>{t.dock?.exploreEcosystem}</span>
+        </button>
+      </footer>
     </div>
   );
 }
