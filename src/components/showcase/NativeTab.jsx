@@ -63,7 +63,7 @@ export default function NativeTab({ t: propT }) {
       <div className="tab-header">
         <div className="tab-status-badge">
           <span className="zen-pulse-dot roadmap" />
-          <span className="badge-text">{t.badges?.roadmap || 'In Roadmap'}</span>
+          <span className="badge-text">{t.badges?.researchPlan || t.badges?.roadmap || 'Research & Plan'}</span>
           <span className="badge-subtext">Desktop & Mobile Standalone</span>
         </div>
         <h2 className="tab-headline">{t.native?.headline}</h2>

@@ -91,9 +91,9 @@ export const translations = {
       langToggle: 'ID'
     },
     hero: {
-      tag: 'Alat Fokus & Pengingat Waktu untuk Muslim',
-      title: 'Zen Clock Apps',
-      subtitle: 'Fokus dan Tetap Ingat Waktu sebagai Muslim.',
+      tag: 'Muslim Utilities',
+      title: 'Zen Clock: Pomodoro & Muslim Prayer Times',
+      subtitle: 'Tetap Fokus & Ingat Waktu sebagai Muslim.',
       allAppsBadge: 'Tersedia di berbagai platform'
     },
     dock: {
@@ -103,16 +103,18 @@ export const translations = {
       browser: 'Browser Extension',
       vscode: 'VS Code Extension',
       cli: 'CLI Program (Go)',
-      native: 'Native & Mobile Roadmap'
+      native: 'Native Apps (Research & Plan)'
     },
     badges: {
-      live: 'Tersedia',
-      roadmap: 'Tahap Riset & Rencana',
+      live: 'Live & Stable',
+      inDev: 'Dalam Pengembangan',
+      researchPlan: 'Research & Plan',
+      roadmap: 'Research & Plan',
       popular: 'Paling Populer',
       lightweight: 'Ultra Ringan'
     },
     browser: {
-      headline: 'Flip Clock, Jadwal Reminder Sholat serta Pomodoro di Browser Extension',
+      headline: 'Zen Clock, Jadwal Sholat serta Pomodoro di Browser Extension',
       description: 'Zen Clock langsung dari toolbar. Praktis, ringan, dan tetap ingat waktu sebagai Muslim.',
       addChrome: 'Pasang di Chrome & Edge',
       downloadZip: 'Unduh Rilis ZIP (.zip)',
@@ -161,7 +163,7 @@ export const translations = {
       feature3Desc: 'Menggunakan algoritma waktu sholat presisi tinggi standar Kemenag RI.'
     },
     native: {
-      headline: 'Rencana Aplikasi Desktop & Mobile',
+      headline: 'Zen Clock, Jadwal Sholat serta Pomodoro di Desktop & Mobile (Research & Plan)',
       description: 'Zen Clock rencananya bakal hadir langsung di Menu Bar macOS, Windows Tray, Linux, dan aplikasi mobile (Android & iOS).',
       macTitle: 'macOS Menu Bar App',
       macDesc: 'Aplikasi status bar minimalis di pojok kanan atas dengan popover ringkas.',
@@ -272,9 +274,9 @@ export const translations = {
       langToggle: 'EN'
     },
     hero: {
-      tag: 'Focus & Prayer Reminder for Muslims',
-      title: 'Zen Clock Apps',
-      subtitle: 'Focus and Always Remember Time as a Muslim.',
+      tag: 'Muslim Utilities',
+      title: 'Zen Clock: Pomodoro & Muslim Prayer Times',
+      subtitle: 'Stay Focused & Remember Time as a Muslim.',
       allAppsBadge: 'Available across all platforms'
     },
     dock: {
@@ -284,16 +286,18 @@ export const translations = {
       browser: 'Browser Extension',
       vscode: 'VS Code Extension',
       cli: 'CLI Program (Go)',
-      native: 'Native & Mobile Roadmap'
+      native: 'Native Apps (Research & Plan)'
     },
     badges: {
       live: 'Live & Stable',
-      roadmap: 'In Roadmap',
+      inDev: 'In Development',
+      researchPlan: 'Research & Plan',
+      roadmap: 'Research & Plan',
       popular: 'Most Popular',
       lightweight: 'Ultra Lightweight'
     },
     browser: {
-      headline: 'Flip Clock, Prayer Schedule & Pomodoro Timer on Browser Extension',
+      headline: 'Zen Clock, Prayer Schedule & Pomodoro on Browser Extension',
       description: 'Zen Clock on your toolbar with Prayer Schedule and Pomodoro. Fast, lightweight, and easy to use.',
       addChrome: 'Add to Chrome & Edge',
       downloadZip: 'Download ZIP Release (.zip)',
@@ -325,7 +329,7 @@ export const translations = {
       feature4Desc: 'Seamlessly matches your active light or dark VS Code themes.'
     },
     cli: {
-      headline: 'Flip Clock, Prayer Schedule & Pomodoro Timer on Terminal',
+      headline: 'Zen Clock, Prayer Schedule & Pomodoro on Terminal',
       description: 'Built for terminal muslim users.',
       tabBrew: 'Homebrew (macOS/Linux)',
       tabGo: 'Go Install',
@@ -342,7 +346,7 @@ export const translations = {
       feature3Desc: 'High-precision prayer computation using astronomical formulas.'
     },
     native: {
-      headline: 'Desktop & Mobile Apps Roadmap',
+      headline: 'Zen Clock, Prayer Schedule & Pomodoro on Desktop & Mobile (Research & Plan)',
       description: 'Zen Clock is planned to run natively on macOS Menu Bar, Windows Tray, Linux, and mobile apps (iOS & Android).',
       macTitle: 'macOS Menu Bar App',
       macDesc: 'Minimalist status bar utility with countdown and sleek popover.',

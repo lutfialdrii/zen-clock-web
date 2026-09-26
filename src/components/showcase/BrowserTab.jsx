@@ -23,8 +23,8 @@ export default function BrowserTab({ t: propT }) {
       {/* Header & Status Badge */}
       <div className="tab-header">
         <div className="tab-status-badge">
-          <span className="zen-pulse-dot live" />
-          <span className="badge-text">{t.badges?.live || 'Live & Stable'}</span>
+          <span className="zen-pulse-dot in-dev" />
+          <span className="badge-text">{t.badges?.inDev || 'Dalam Pengembangan'}</span>
           <span className="badge-subtext">Chrome · Edge · Brave · Firefox</span>
         </div>
         <h2 className="tab-headline">{t.browser?.headline}</h2>

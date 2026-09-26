@@ -7,6 +7,43 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 
 
 ---
 
+## [0.2.3] - 2026-09-26 — Official App Title "Zen Clock: Pomodoro & Muslim Prayer Times", Unified Tab Titles & Release Statuses
+
+### 🇮🇩 Bahasa Indonesia
+
+#### ✨ Standarisasi Identitas & Status Produk
+- **Judul Resmi Aplikasi & Hero Section**:
+  - **Hero Tag**: *"Muslim Utilities"*.
+  - **Hero Title**: *"Zen Clock: Pomodoro & Muslim Prayer Times"*.
+  - **Hero Subtitle**: *"Tetap Fokus & Ingat Waktu sebagai Muslim."*.
+  - **Browser Title & Meta**: Menyelaraskan `<title>` dan meta deskripsi browser menjadi *"Zen Clock: Pomodoro & Muslim Prayer Times"*.
+- **Pola Judul Tab Terpadu**:
+  - Menerapkan format seragam: `Zen Clock, Jadwal Sholat serta Pomodoro di {{app}}`.
+  - Browser: *"Zen Clock, Jadwal Sholat serta Pomodoro di Browser Extension"*.
+  - VS Code: *"Zen Clock, Jadwal Sholat serta Pomodoro di VS Code"*.
+  - CLI: *"Zen Clock, Jadwal Sholat serta Pomodoro di Terminal Favoritmu"*.
+  - Native: *"Zen Clock, Jadwal Sholat serta Pomodoro di Desktop & Mobile (Research & Plan)"*.
+- **Penyesuaian Status Rilis Produk yang Presisi**:
+  - **VS Code Extension**: Satu-satunya produk yang berstatus rilis resmi (**Live & Stable**) dengan indikator hijau emerald.
+  - **Browser Extension**: Berstatus **Dalam Pengembangan** (*In Development*) dengan indikator titik amber.
+  - **CLI Program (Go)**: Berstatus **Dalam Pengembangan** (*In Development*) dengan indikator titik amber.
+  - **Native Apps**: Berlabel dan berstatus **Research & Plan**.
+
+### 🇬🇧 English
+
+#### ✨ Identity Standardization & Product Statuses
+- **Official App Title & Hero Section**:
+  - Tag: *"Muslim Utilities"*, Title: *"Zen Clock: Pomodoro & Muslim Prayer Times"*, Subtitle: *"Stay Focused & Remember Time as a Muslim."*.
+  - Updated `<title>` in `index.html` to *"Zen Clock: Pomodoro & Muslim Prayer Times"*.
+- **Unified Tab Title Pattern**:
+  - Applied pattern: `Zen Clock, Prayer Schedule & Pomodoro on/in {{app}}`.
+- **Accurate Product Release Badges**:
+  - VS Code Extension: **Live & Stable** (released).
+  - Browser Extension & CLI Program: **In Development** (amber pulse indicator).
+  - Native Apps: **Research & Plan**.
+
+---
+
 ## [0.2.2] - 2026-09-26 — Zen Clock Apps Reordering & Human-Like Copy Refinement
 
 ### 🇮🇩 Bahasa Indonesia

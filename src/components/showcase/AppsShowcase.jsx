@@ -146,7 +146,7 @@ export default function AppsShowcase({ onBackToClock, initialTab = 'browser' }) 
             onClick={() => handleTabChange('native')}
           >
             <Smartphone size={16} />
-            <span>{t.tabs?.native || 'Native & Mobile Roadmap'}</span>
+            <span>{t.tabs?.native || 'Native Apps (Research & Plan)'}</span>
           </button>
         </div>
       </div>
