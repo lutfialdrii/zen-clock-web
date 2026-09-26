@@ -5,7 +5,7 @@ import { sendNotification, requestWebNotificationPermission, getVsCodeApi } from
 
 export default function PrayerTime() {
   const [coords, setCoords] = useState(null);
-  const [error, setError] = useState(null);
+  const [error, _setError] = useState(null);
   const [prayerData, setPrayerData] = useState(null);
   const [allPrayers, setAllPrayers] = useState(null);
   const [locationName, setLocationName] = useState('');
