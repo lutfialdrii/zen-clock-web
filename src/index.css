@@ -559,9 +559,14 @@ body {
   box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
 }
 
-.zen-pulse-dot.roadmap {
+.zen-pulse-dot.in-dev {
   background-color: var(--zen-amber);
   box-shadow: 0 0 8px rgba(251, 191, 36, 0.6);
+}
+
+.zen-pulse-dot.roadmap {
+  background-color: #a855f7;
+  box-shadow: 0 0 8px rgba(168, 85, 247, 0.6);
 }
 
 /* Desk Clock Top Controls Bar */
