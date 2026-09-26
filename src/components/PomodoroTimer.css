@@ -1,0 +1,177 @@
+.pomodoro-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 16px;
+  padding: 10px 0;
+}
+
+/* Pill Tabs */
+.pomodoro-header {
+  display: flex;
+  gap: 6px;
+  background-color: rgba(255, 255, 255, 0.04);
+  padding: 4px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.pomodoro-pill-tab {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 5px 12px;
+  border-radius: 14px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.pomodoro-pill-tab:hover {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.pomodoro-pill-tab.active {
+  background-color: var(--zen-accent, #fbbf24);
+  color: #16181f;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(251, 191, 36, 0.3);
+}
+
+/* Flip Clock for Pomodoro */
+.pomodoro-flip-clock {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+}
+
+.pomodoro-flip-clock .flip-unit-container {
+  display: block;
+  position: relative;
+  width: 86px;
+  height: 112px;
+  perspective: 1000px;
+  border-radius: 10px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.55), 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.pomodoro-flip-clock .flip-card {
+  font-size: 60px;
+}
+
+/* Controls */
+.pomodoro-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.pomodoro-btn-primary {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--zen-accent, #fbbf24);
+  color: #16181f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(251, 191, 36, 0.35);
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.pomodoro-btn-primary:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 18px rgba(251, 191, 36, 0.5);
+}
+
+.pomodoro-btn-primary.active-running {
+  background-color: #ef4444;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.4);
+}
+
+.pomodoro-btn-primary.active-running:hover {
+  box-shadow: 0 6px 18px rgba(239, 68, 68, 0.6);
+}
+
+.pomodoro-btn-primary .play-icon {
+  margin-left: 2px;
+}
+
+.pomodoro-btn-secondary {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pomodoro-btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  transform: rotate(-30deg);
+}
+
+/* Fullscreen variant for Desk Clock */
+.pomodoro-container-full {
+  gap: clamp(24px, 4vh, 48px);
+  padding: 20px 0;
+}
+
+.pomodoro-container-full .pomodoro-header {
+  padding: 6px 8px;
+  border-radius: 28px;
+}
+
+.pomodoro-container-full .pomodoro-pill-tab {
+  padding: 8px 20px;
+  font-size: clamp(13px, 1.4vw, 16px);
+  border-radius: 20px;
+}
+
+.pomodoro-container-full .pomodoro-flip-clock {
+  gap: clamp(14px, 2.5vw, 30px);
+}
+
+.pomodoro-container-full .pomodoro-flip-clock .flip-unit-container {
+  width: clamp(96px, 18vw, 190px);
+  height: clamp(128px, 24vw, 250px);
+  perspective: 1200px;
+  border-radius: clamp(10px, 2vw, 18px);
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.6), 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.pomodoro-container-full .pomodoro-flip-clock .flip-card {
+  font-size: clamp(68px, 13vw, 135px);
+}
+
+.pomodoro-container-full .pomodoro-controls {
+  gap: clamp(14px, 2vw, 24px);
+  margin-top: 14px;
+}
+
+.pomodoro-container-full .pomodoro-btn-primary {
+  width: clamp(54px, 6vw, 68px);
+  height: clamp(54px, 6vw, 68px);
+}
+
+.pomodoro-container-full .pomodoro-btn-secondary {
+  width: clamp(42px, 5vw, 54px);
+  height: clamp(42px, 5vw, 54px);
+}
+

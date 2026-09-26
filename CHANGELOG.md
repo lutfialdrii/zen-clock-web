@@ -1,9 +1,61 @@
 # Release Notes (Changelog)
 
-All notable public releases and user-facing updates for **Zen Flip Clock** (Web, PWA & Central Ecosystem Hub) are documented in this file.  
+All notable public releases and user-facing updates for **Zen Clock** (Web, PWA & Central Ecosystem Hub) are documented in this file.  
 For internal engineering trajectory logs, task breakdowns, and prompt history, see [docs/DEV_LOG.md](docs/DEV_LOG.md). For system design and architecture, see [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+---
+
+## [0.2.1] - 2026-09-26 — Standalone Web Clock Customization & Feature Parity
+
+### 🇬🇧 English
+
+#### ✨ Features & Highlights
+- **100% Customization & Behavior Parity with Browser Extension**:
+  - The standalone Live Web Clock (`/`) now shares the exact same capabilities, customization modal suite, and design as the Zen Clock Browser Extension desk clock mode.
+- **Interactive City Picker with 539+ Indonesian Cities & Global Search**:
+  - Full catalog covering 539+ cities and regencies across all 38 Indonesian provinces plus international locations (Makkah, Madinah, KL, Singapore).
+  - Built-in GPS auto-detection using browser Geolocation and OpenStreetMap reverse geocoding.
+  - Direct global online search fallback for unlisted locations worldwide.
+- **Prayer Minute Adjustments (Ihtiyat)**:
+  - Custom offset modal allowing minute-by-minute adjustments (-10 to +10 mins) for Subuh, Terbit, Dzuhur, Ashar, Maghrib, and Isya.
+  - Real-time preview comparing base astronomical calculation with applied corrections.
+- **Dynamic Theme Accent Color Customizer**:
+  - 6 curated presets (Warm Amber, Cyberpunk Cyan, Emerald Forest, Rose Velvet, Violet Eclipse, Coral Sunset) or any custom Hex code.
+  - Instantly updates CSS variables (`--zen-accent`) across cards, badges, and controls.
+- **Configurable Pomodoro Focus Durations**:
+  - Choose custom work sessions (15m, 20m, 25m, 30m, 45m, 50m, 60m) and break intervals (3m, 5m, 10m, 15m).
+  - Background ticker with local storage persistence and session state transitions.
+- **Web Notification Support**:
+  - Real-time prayer call notifications and Pomodoro session completion alerts via the standard Web Notification API.
+- **Refined Desk Clock Top Controls Bar**:
+  - Brand identity, tab switcher with active Pomodoro pulsing status dot, PWA install trigger, Settings modal launcher, and Fullscreen toggle.
+
+---
+
+### 🇮🇩 Bahasa Indonesia
+
+#### ✨ Fitur Utama & Pembaruan
+- **Paritas Penuh Fitur & Kustomisasi dengan Browser Extension**:
+  - Jam Web Mandiri (`/`) kini memiliki fitur kustomisasi, kontrol modal, dan pengalaman pengguna yang 100% setara dengan mode Desk Clock pada ekstensi browser.
+- **Pemilih Kota Interaktif (539+ Kota se-Indonesia & Pencarian Global)**:
+  - Katalog lengkap 539+ kota dan kabupaten di 38 provinsi Indonesia serta kota internasional terpopuler (Makkah, Madinah, Kuala Lumpur, Singapura).
+  - Deteksi lokasi otomatis berbasis GPS Geolocation dan *reverse geocoding* OpenStreetMap.
+  - Pencarian lokasi global langsung untuk wilayah mana pun di dunia.
+- **Koreksi Menit Waktu Sholat (Ihtiyat)**:
+  - Modal koreksi waktu sholat (-10 hingga +10 menit) untuk Subuh, Terbit, Dzuhur, Ashar, Maghrib, dan Isya.
+  - Pratinjau langsung perbandingan jadwal dasar astronomis dan hasil koreksi.
+- **Pengatur Warna Aksen Tema Dinamis**:
+  - 6 pilihan tema siap pakai (*Warm Amber, Cyberpunk Cyan, Emerald Forest, Rose Velvet, Violet Eclipse, Coral Sunset*) serta dukungan kode HEX kustom.
+  - Sinkronisasi instan ke variabel CSS sistem desain (`--zen-accent`).
+- **Durasi Timer Pomodoro yang Dapat Disesuaikan**:
+  - Bebas menentukan durasi fokus kerja (15m, 20m, 25m, 30m, 45m, 50m, 60m) dan waktu istirahat (3m, 5m, 10m, 15m).
+  - State persisten di penyimpanan browser dengan transisi otomatis antar sesi.
+- **Dukungan Notifikasi Web Browser**:
+  - Pengingat adzan waktu sholat dan notifikasi selesainya sesi Pomodoro menggunakan Web Notification API standar.
+- **Bilah Kontrol Atas (Top Header Controls Bar)**:
+  - Identitas Zen Clock, tab navigator dengan indikator titik hijau berdenyut saat Pomodoro aktif, tombol unduh PWA, pintasan modal pengaturan, dan tombol layar penuh (*Fullscreen*).
 
 ---
 

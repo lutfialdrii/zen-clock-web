@@ -1,103 +1,118 @@
 import React, { useState, useEffect } from 'react';
 import { Play, Pause, RotateCcw } from 'lucide-react';
-import FlipUnit from './FlipUnit';
-import { sendNotification, requestWebNotificationPermission, getVsCodeApi } from '../utils/notification';
+import FlipUnit from './FlipUnit.jsx';
+import { getTranslations } from '../utils/i18n.js';
+import './PomodoroTimer.css';
 
-export default function PomodoroTimer() {
-  const [mode, setMode] = useState('work'); // 'work' | 'break'
-  const [timeLeft, setTimeLeft] = useState(25 * 60);
-  const [isRunning, setIsRunning] = useState(false);
+export default function PomodoroTimer({
+  language = 'id',
+  settings,
+  pomodoroState,
+  onPomodoroAction,
+  variant = 'popup',
+}) {
+  const [localTimeLeft, setLocalTimeLeft] = useState(
+    pomodoroState?.timeLeft ?? (settings?.workDuration ? settings.workDuration * 60 : 25 * 60)
+  );
+  const [isRunning, setIsRunning] = useState(!!pomodoroState?.isRunning);
+  const [mode, setMode] = useState(pomodoroState?.mode || 'work');
 
-  // Sync status to VS Code status bar
+  // Synchronize with external Pomodoro state updates (from storage or service worker)
   useEffect(() => {
-    const api = getVsCodeApi();
-    if (api) {
-      api.postMessage({
-        type: 'POMODORO_STATUS',
-        isRunning,
-        mode,
-        timeLeft
-      });
-    }
-  }, [isRunning, timeLeft, mode]);
+    if (!pomodoroState) return;
 
+    setIsRunning(!!pomodoroState.isRunning);
+    setMode(pomodoroState.mode || 'work');
+
+    if (pomodoroState.isRunning && pomodoroState.targetEndTime) {
+      const remaining = Math.max(0, Math.round((pomodoroState.targetEndTime - Date.now()) / 1000));
+      setLocalTimeLeft(remaining);
+    } else if (typeof pomodoroState.timeLeft === 'number') {
+      setLocalTimeLeft(pomodoroState.timeLeft);
+    }
+  }, [pomodoroState]);
+
+  // Local ticker when running for smooth 1-second countdown in UI
   useEffect(() => {
     let timer = null;
-    if (isRunning && timeLeft > 0) {
-      const minutes = Math.floor(timeLeft / 60);
-      const seconds = timeLeft % 60;
-      const formattedTime = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-      document.title = `(${formattedTime}) ${mode === 'work' ? 'Work' : 'Break'} - Zen Clock`;
-
+    if (isRunning && pomodoroState?.targetEndTime) {
       timer = setInterval(() => {
-        setTimeLeft((prev) => prev - 1);
+        const remaining = Math.max(0, Math.round((pomodoroState.targetEndTime - Date.now()) / 1000));
+        setLocalTimeLeft(remaining);
+        if (remaining <= 0) {
+          setIsRunning(false);
+          clearInterval(timer);
+        }
       }, 1000);
-    } else if (timeLeft === 0 && isRunning) {
-      const isWorkFinished = mode === 'work';
-      const notificationMsg = isWorkFinished
-        ? 'Sesi Work (25m) selesai! Waktunya Istirahat (Break 5m).'
-        : 'Sesi Break (5m) selesai! Siap untuk kembali bekerja (Work 25m)?';
-
-      sendNotification(isWorkFinished ? '🍅 Pomodoro' : '⚡ Break Finished', notificationMsg, 'info');
-
-      if (isWorkFinished) {
-        setMode('break');
-        setTimeLeft(5 * 60);
-      } else {
-        setMode('work');
-        setTimeLeft(25 * 60);
-      }
-      setIsRunning(false);
-      document.title = 'Zen Flip Clock';
-    } else if (!isRunning) {
-      document.title = 'Zen Flip Clock';
     }
-    return () => clearInterval(timer);
-  }, [isRunning, timeLeft, mode]);
+    return () => {
+      if (timer) clearInterval(timer);
+    };
+  }, [isRunning, pomodoroState?.targetEndTime]);
 
   const togglePlay = () => {
-    if (!isRunning) {
-      requestWebNotificationPermission();
-    }
-    setIsRunning(!isRunning);
-  };
-
-  const resetTimer = () => {
-    setIsRunning(false);
-    if (mode === 'work') {
-      setTimeLeft(25 * 60);
+    if (isRunning) {
+      if (onPomodoroAction) {
+        onPomodoroAction('PAUSE_POMODORO');
+      } else if (typeof window !== 'undefined' && window.chrome?.runtime) {
+        window.chrome.runtime.sendMessage({ type: 'PAUSE_POMODORO' });
+      }
+      setIsRunning(false);
     } else {
-      setTimeLeft(5 * 60);
+      if (onPomodoroAction) {
+        onPomodoroAction('START_POMODORO', { timeLeft: localTimeLeft, mode });
+      } else if (typeof window !== 'undefined' && window.chrome?.runtime) {
+        window.chrome.runtime.sendMessage({ type: 'START_POMODORO', timeLeft: localTimeLeft, mode });
+      }
+      setIsRunning(true);
     }
   };
 
-  const switchMode = (newMode) => {
+  const handleReset = () => {
+    if (onPomodoroAction) {
+      onPomodoroAction('RESET_POMODORO', { mode });
+    } else if (typeof window !== 'undefined' && window.chrome?.runtime) {
+      window.chrome.runtime.sendMessage({ type: 'RESET_POMODORO', mode });
+    }
+    setIsRunning(false);
+    const duration = (mode === 'work' ? (settings?.workDuration || 25) : (settings?.breakDuration || 5)) * 60;
+    setLocalTimeLeft(duration);
+  };
+
+  const handleSwitchMode = (newMode) => {
+    if (newMode === mode) return;
     setMode(newMode);
     setIsRunning(false);
-    if (newMode === 'work') {
-      setTimeLeft(25 * 60);
-    } else {
-      setTimeLeft(5 * 60);
+    const duration = (newMode === 'work' ? (settings?.workDuration || 25) : (settings?.breakDuration || 5)) * 60;
+    setLocalTimeLeft(duration);
+
+    if (onPomodoroAction) {
+      onPomodoroAction('SWITCH_POMODORO_MODE', { mode: newMode });
+    } else if (typeof window !== 'undefined' && window.chrome?.runtime) {
+      window.chrome.runtime.sendMessage({ type: 'SWITCH_POMODORO_MODE', mode: newMode });
     }
   };
 
-  const minutes = Math.floor(timeLeft / 60);
-  const seconds = timeLeft % 60;
+  const minutes = Math.floor(localTimeLeft / 60);
+  const seconds = localTimeLeft % 60;
+  const t = getTranslations(language);
+
+  const isFull = variant === 'full';
 
   return (
-    <div className="pomodoro-container">
+    <div className={`pomodoro-container ${isFull ? 'pomodoro-container-full' : 'pomodoro-container-popup'}`}>
       <div className="pomodoro-header">
         <button
-          className={`pomodoro-tab ${mode === 'work' ? 'active' : ''}`}
-          onClick={() => switchMode('work')}
+          className={`pomodoro-pill-tab ${mode === 'work' ? 'active' : ''}`}
+          onClick={() => handleSwitchMode('work')}
         >
-          Work (25m)
+          {t.ui.work} ({settings?.workDuration || 25}m)
         </button>
         <button
-          className={`pomodoro-tab ${mode === 'break' ? 'active' : ''}`}
-          onClick={() => switchMode('break')}
+          className={`pomodoro-pill-tab ${mode === 'break' ? 'active' : ''}`}
+          onClick={() => handleSwitchMode('break')}
         >
-          Break (5m)
+          {t.ui.break} ({settings?.breakDuration || 5}m)
         </button>
       </div>
 
@@ -107,11 +122,25 @@ export default function PomodoroTimer() {
       </div>
 
       <div className="pomodoro-controls">
-        <button className="pomodoro-btn" onClick={togglePlay} aria-label={isRunning ? 'Pause' : 'Start'}>
-          {isRunning ? <Pause size={18} /> : <Play size={18} />}
+        <button
+          className={`pomodoro-btn-primary ${isRunning ? 'active-running' : ''}`}
+          onClick={togglePlay}
+          aria-label={isRunning ? t.ui.pause : t.ui.start}
+          title={isRunning ? t.ui.pause : t.ui.start}
+        >
+          {isRunning ? (
+            <Pause size={isFull ? 24 : 18} />
+          ) : (
+            <Play size={isFull ? 24 : 18} className="play-icon" />
+          )}
         </button>
-        <button className="pomodoro-btn" onClick={resetTimer} aria-label="Reset">
-          <RotateCcw size={18} />
+        <button
+          className="pomodoro-btn-secondary"
+          onClick={handleReset}
+          aria-label={t.ui.reset}
+          title={t.ui.reset}
+        >
+          <RotateCcw size={isFull ? 20 : 16} />
         </button>
       </div>
     </div>

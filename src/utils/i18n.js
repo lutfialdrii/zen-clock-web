@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { translations } from './translations';
+import { translations } from './translations.js';
 
 const STORAGE_KEY = 'zen_clock_lang';
 
@@ -42,4 +42,8 @@ export function useLanguage() {
   const t = translations[lang] || translations.id;
 
   return { lang, changeLanguage, t };
+}
+
+export function getTranslations(lang = 'id') {
+  return translations[lang] || translations.id;
 }

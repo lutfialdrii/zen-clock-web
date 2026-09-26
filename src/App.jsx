@@ -2,9 +2,23 @@ import React, { useState, useEffect } from 'react';
 import FlipClock from './components/FlipClock';
 import PrayerTime from './components/PrayerTime';
 import PomodoroTimer from './components/PomodoroTimer';
+import CityPickerModal from './components/CityPickerModal';
+import AdjustModal from './components/AdjustModal';
+import SettingsModal from './components/SettingsModal';
 import AppsShowcase from './components/showcase/AppsShowcase';
-import { Timer, Clock, Download } from 'lucide-react';
-import { useLanguage } from './utils/i18n';
+import { Timer, Clock, Download, Settings as SettingsIcon, Maximize, Minimize } from 'lucide-react';
+import { useLanguage, getTranslations } from './utils/i18n';
+import {
+  getSettings,
+  saveSettings,
+  getPomodoroState,
+  isPomodoroActive,
+  executePomodoroAction,
+  completePomodoroSession,
+  getLastRemindedPrayer,
+  setLastRemindedPrayer,
+} from './utils/storage';
+import { calculatePrayerTimes, shouldTriggerPrayerAlert } from './utils/prayerHelper';
 import './index.css';
 
 const resolveCurrentRoute = () => {
@@ -23,13 +37,116 @@ const resolveCurrentRoute = () => {
 };
 
 function App() {
-  const { t } = useLanguage();
+  const { lang, setLang } = useLanguage();
   const [activeTab, setActiveTab] = useState('clock'); // 'clock' | 'pomodoro'
   const [{ currentRoute, initialShowcaseTab }, setNavState] = useState(() => {
     const { route, tab } = resolveCurrentRoute();
     return { currentRoute: route, initialShowcaseTab: tab };
   });
+  const [settings, setSettings] = useState(null);
+  const [pomodoroState, setPomodoroState] = useState(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const [deferredPrompt, setDeferredPrompt] = useState(null);
+
+  // Modals state
+  const [isCityPickerOpen, setIsCityPickerOpen] = useState(false);
+  const [isAdjustOpen, setIsAdjustOpen] = useState(false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+
+  useEffect(() => {
+    getSettings().then((s) => {
+      setSettings(s);
+      if (s?.accentColor) {
+        document.documentElement.style.setProperty('--zen-accent', s.accentColor);
+      }
+      if (s?.language && s.language !== lang) {
+        setLang(s.language);
+      }
+    });
+
+    getPomodoroState().then((p) => {
+      setPomodoroState(p);
+      if (isPomodoroActive(p)) {
+        setActiveTab('pomodoro');
+      }
+    });
+
+    const handleSettingsChanged = (e) => {
+      const newSettings = e.detail;
+      setSettings(newSettings);
+      if (newSettings?.accentColor) {
+        document.documentElement.style.setProperty('--zen-accent', newSettings.accentColor);
+      }
+      if (newSettings?.language && newSettings.language !== lang) {
+        setLang(newSettings.language);
+      }
+    };
+
+    const handlePomodoroChanged = (e) => {
+      setPomodoroState(e.detail);
+    };
+
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+
+    window.addEventListener('zen_settings_changed', handleSettingsChanged);
+    window.addEventListener('zen_pomodoro_changed', handlePomodoroChanged);
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+
+    return () => {
+      window.removeEventListener('zen_settings_changed', handleSettingsChanged);
+      window.removeEventListener('zen_pomodoro_changed', handlePomodoroChanged);
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+    };
+  }, [lang, setLang]);
+
+  // Background ticker for Pomodoro completion and Prayer notification
+  useEffect(() => {
+    if (!settings) return;
+
+    const checkInterval = setInterval(async () => {
+      const now = new Date();
+
+      // Check Pomodoro completion
+      const pState = await getPomodoroState();
+      if (pState.isRunning && pState.targetEndTime && pState.targetEndTime <= now.getTime()) {
+        const completed = await completePomodoroSession();
+        setPomodoroState(completed);
+      }
+
+      // Check Prayer notification
+      if (settings.notifyPrayer !== false && settings.city) {
+        const prayerCalc = calculatePrayerTimes(settings.city, now, settings.adjustments, settings.language || 'id');
+        if (prayerCalc && Array.isArray(prayerCalc.allPrayers)) {
+          const lastReminded = await getLastRemindedPrayer();
+          const todayStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+
+          for (const prayer of prayerCalc.allPrayers) {
+            if (prayer.key === 'sunrise') continue;
+            const reminderId = `${prayer.key}-${todayStr}`;
+            if (shouldTriggerPrayerAlert(now, prayer.date, lastReminded, reminderId)) {
+              await setLastRemindedPrayer(reminderId);
+
+              if (typeof Notification !== 'undefined' && Notification.permission === 'granted') {
+                const isEn = settings.language === 'en';
+                const title = isEn
+                  ? `🕌 Prayer Time for ${prayer.name} has arrived!`
+                  : `🕌 Waktu Sholat ${prayer.name} telah tiba!`;
+                const body = isEn
+                  ? `Prayer time for ${settings.city.name} and surrounding areas.`
+                  : `Waktu sholat ${prayer.name} untuk wilayah ${settings.city.name} dan sekitarnya telah tiba.`;
+                new Notification(title, { body, icon: '/favicon.svg' });
+              }
+              break;
+            }
+          }
+        }
+      }
+    }, 5000);
+
+    return () => clearInterval(checkInterval);
+  }, [settings]);
 
   useEffect(() => {
     const handlePopState = () => {
@@ -79,6 +196,33 @@ function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleUpdateSettings = async (partial) => {
+    const updated = await saveSettings(partial);
+    setSettings(updated);
+    if (updated.accentColor) {
+      document.documentElement.style.setProperty('--zen-accent', updated.accentColor);
+    }
+    if (updated.language) {
+      setLang(updated.language);
+    }
+  };
+
+  const handlePomodoroAction = async (type, payload = {}) => {
+    const updated = await executePomodoroAction(type, payload);
+    setPomodoroState(updated);
+  };
+
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    } else {
+      document.exitFullscreen().catch(() => {});
+    }
+  };
+
+  const currentLang = settings?.language || lang || 'id';
+  const t = getTranslations(currentLang);
+
   if (currentRoute === 'apps') {
     return (
       <AppsShowcase
@@ -90,50 +234,99 @@ function App() {
 
   return (
     <div className="app-container">
-      {/* Distraction-Free Header: Only Clock & Pomodoro Tabs */}
-      <div className="app-header-nav">
-        <button
-          type="button"
-          className={`nav-btn ${activeTab === 'clock' ? 'active' : ''}`}
-          onClick={() => setActiveTab('clock')}
-          title="Flip Clock & Prayer Times"
-        >
-          <Clock size={18} />
-          <span>Clock</span>
-        </button>
-        <button
-          type="button"
-          className={`nav-btn ${activeTab === 'pomodoro' ? 'active' : ''}`}
-          onClick={() => setActiveTab('pomodoro')}
-          title="Pomodoro Timer"
-        >
-          <Timer size={18} />
-          <span>Pomodoro</span>
-        </button>
-        {deferredPrompt && (
+      {/* Top Header Controls Bar (Parity with DeskClockPage) */}
+      <header className="deskclock-top-bar">
+        <div className="deskclock-left">
+          <div className="deskclock-brand">
+            <Clock size={16} className="brand-icon" />
+            <span className="brand-name">Zen Clock</span>
+          </div>
+        </div>
+
+        <nav className="deskclock-tab-nav">
           <button
             type="button"
-            className="nav-btn install-btn"
-            onClick={handleInstallClick}
-            title={t.nav?.installPwa || 'Install'}
+            className={`deskclock-tab-btn ${activeTab === 'clock' ? 'active' : ''}`}
+            onClick={() => setActiveTab('clock')}
+            title="Clock & Prayer Times"
           >
-            <Download size={18} />
-            <span>{t.nav?.installPwa || 'Install'}</span>
+            <Clock size={15} />
+            <span>{t.ui?.navClock || 'Clock'}</span>
           </button>
-        )}
-      </div>
+          <button
+            type="button"
+            className={`deskclock-tab-btn ${activeTab === 'pomodoro' ? 'active' : ''}`}
+            onClick={() => setActiveTab('pomodoro')}
+            title="Pomodoro Timer"
+          >
+            <Timer size={15} />
+            <span>{t.ui?.navPomodoro || 'Pomodoro'}</span>
+            {isPomodoroActive(pomodoroState) && <span className="pomodoro-active-dot" />}
+          </button>
+        </nav>
 
-      {/* Main Clock Content */}
-      <div className="app-content">
+        <div className="deskclock-actions">
+          {deferredPrompt && (
+            <button
+              type="button"
+              className="deskclock-icon-btn install-btn"
+              onClick={handleInstallClick}
+              title={t.nav?.installPwa || 'Install App'}
+              aria-label="Install App"
+            >
+              <Download size={16} />
+              <span>{t.nav?.installPwa || 'Install'}</span>
+            </button>
+          )}
+          <button
+            type="button"
+            className="deskclock-icon-btn"
+            onClick={() => setIsSettingsOpen(true)}
+            title={t.ui?.settings || 'Settings'}
+            aria-label="Settings"
+          >
+            <SettingsIcon size={18} />
+          </button>
+          <button
+            type="button"
+            className="deskclock-icon-btn"
+            onClick={toggleFullscreen}
+            title={isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
+            aria-label={isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
+          >
+            {isFullscreen ? <Minimize size={18} /> : <Maximize size={18} />}
+          </button>
+        </div>
+      </header>
+
+      {/* Main Display: Ambient Clock or Pomodoro */}
+      <main className="app-content">
         {activeTab === 'clock' ? (
           <>
-            <FlipClock />
-            <PrayerTime />
+            <FlipClock language={currentLang} variant="full" />
+            <PrayerTime
+              settings={settings}
+              onOpenCityPicker={() => setIsCityPickerOpen(true)}
+              onOpenAdjustModal={() => setIsAdjustOpen(true)}
+              onOpenThemeModal={() => setIsSettingsOpen(true)}
+              onToggleNotify={() =>
+                handleUpdateSettings({ notifyPrayer: settings?.notifyPrayer === false })
+              }
+              hideDeskClockButton={true}
+            />
           </>
         ) : (
-          <PomodoroTimer />
+          <div className="deskclock-pomodoro-wrapper">
+            <PomodoroTimer
+              language={currentLang}
+              settings={settings}
+              pomodoroState={pomodoroState}
+              onPomodoroAction={handlePomodoroAction}
+              variant="full"
+            />
+          </div>
         )}
-      </div>
+      </main>
 
       {/* Subtle, Non-Intrusive Bottom Dock to Explore Other Apps */}
       <footer className="zen-dock-footer">
@@ -146,6 +339,39 @@ function App() {
           <span>{t.dock?.exploreEcosystem}</span>
         </button>
       </footer>
+
+      {/* Modals for Customization Parity */}
+      <CityPickerModal
+        isOpen={isCityPickerOpen}
+        onClose={() => setIsCityPickerOpen(false)}
+        currentCity={settings?.city}
+        onSelectCity={(city) => handleUpdateSettings({ city })}
+        language={currentLang}
+      />
+
+      <AdjustModal
+        isOpen={isAdjustOpen}
+        onClose={() => setIsAdjustOpen(false)}
+        city={settings?.city}
+        adjustments={settings?.adjustments}
+        onSaveAdjustments={(adjustments) => handleUpdateSettings({ adjustments })}
+        language={currentLang}
+      />
+
+      <SettingsModal
+        isOpen={isSettingsOpen}
+        onClose={() => setIsSettingsOpen(false)}
+        settings={settings}
+        onSaveSettings={handleUpdateSettings}
+        onOpenCityPicker={() => {
+          setIsSettingsOpen(false);
+          setIsCityPickerOpen(true);
+        }}
+        onOpenAdjustModal={() => {
+          setIsSettingsOpen(false);
+          setIsAdjustOpen(true);
+        }}
+      />
     </div>
   );
 }
