@@ -1,8 +1,33 @@
 :root {
-  --bg-color: var(--vscode-editor-background, #0c0d10);
-  --card-bg: var(--vscode-sideBar-background, #1c1e24);
-  --text-color: var(--vscode-editor-foreground, #f0f2f5);
-  --divider-color: var(--vscode-widget-border, #08090a);
+  /* Unified Zen Design System Tokens */
+  --zen-bg-base: #0c0d10;
+  --zen-surface-1: #14151a;
+  --zen-surface-2: #1c1e24;
+  --zen-border: rgba(255, 255, 255, 0.08);
+  --zen-border-hover: rgba(251, 191, 36, 0.35);
+  --zen-glass-bg: rgba(18, 18, 22, 0.75);
+  --zen-glass-blur: blur(12px);
+
+  /* Accents */
+  --zen-amber: #fbbf24;
+  --zen-amber-hover: #f59e0b;
+  --zen-amber-glow: rgba(251, 191, 36, 0.15);
+  --zen-emerald: #10b981;
+  --zen-emerald-glow: rgba(16, 185, 129, 0.15);
+  --zen-indigo: #6366f1;
+
+  /* Typography */
+  --zen-text-primary: #f8fafc;
+  --zen-text-muted: #94a3b8;
+  --zen-text-subtle: #64748b;
+  --zen-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --zen-font-mono: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
+
+  /* Legacy Fallbacks for VS Code Context */
+  --bg-color: var(--zen-bg-base);
+  --card-bg: var(--zen-surface-2);
+  --text-color: var(--zen-text-primary);
+  --divider-color: var(--zen-border);
 }
 
 * {
@@ -443,3 +468,58 @@ body {
   background-color: var(--vscode-button-hoverBackground, #005999);
   transform: scale(1.05);
 }
+
+/* Minimalist Subtle Footer Dock on Live Clock */
+.zen-dock-footer {
+  margin-top: auto;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  z-index: 10;
+}
+
+.zen-dock-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(20, 21, 26, 0.6);
+  border: 1px solid var(--zen-border);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--zen-text-muted);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.zen-dock-link:hover {
+  color: var(--zen-amber);
+  border-color: var(--zen-border-hover);
+  background: rgba(251, 191, 36, 0.08);
+  transform: translateY(-1px);
+}
+
+/* Pulsing Status Dot */
+.zen-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.zen-pulse-dot.live {
+  background-color: var(--zen-emerald);
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+}
+
+.zen-pulse-dot.roadmap {
+  background-color: var(--zen-amber);
+  box-shadow: 0 0 8px rgba(251, 191, 36, 0.6);
+}
+
