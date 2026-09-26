@@ -8,7 +8,7 @@ import { useLanguage } from '../../utils/i18n';
 import './AppsShowcase.css';
 
 const GITHUB_REPO_URL = 'https://github.com/lutfialdrii/zen-clock';
-const VALID_TABS = ['browser', 'vscode', 'cli', 'native'];
+const VALID_TABS = ['browser', 'vscode'];
 
 export default function AppsShowcase({ onBackToClock, initialTab = 'browser' }) {
   const { lang, changeLanguage, t } = useLanguage();
@@ -19,7 +19,8 @@ export default function AppsShowcase({ onBackToClock, initialTab = 'browser' }) 
     return VALID_TABS.includes(hash) ? hash : null;
   };
 
-  const [activeTab, setActiveTab] = useState(() => getHashTab() || initialTab);
+  const safeInitial = (initialTab === 'native' || initialTab === 'cli') ? 'browser' : initialTab;
+  const [activeTab, setActiveTab] = useState(() => getHashTab() || safeInitial);
 
   // Sync with URL hash
   useEffect(() => {
@@ -36,6 +37,7 @@ export default function AppsShowcase({ onBackToClock, initialTab = 'browser' }) 
   }, []);
 
   const handleTabChange = (tabKey) => {
+    if (tabKey === 'native' || tabKey === 'cli') return;
     setActiveTab(tabKey);
     if (typeof window !== 'undefined' && window.history?.replaceState) {
       window.history.replaceState(null, '', '#' + tabKey);
@@ -132,18 +134,22 @@ export default function AppsShowcase({ onBackToClock, initialTab = 'browser' }) 
             type="button"
             role="tab"
             aria-selected={activeTab === 'cli'}
-            className={`tab-btn ${activeTab === 'cli' ? 'active' : ''}`}
-            onClick={() => handleTabChange('cli')}
+            aria-disabled="true"
+            disabled
+            className={`tab-btn tab-btn-disabled ${activeTab === 'cli' ? 'active' : ''}`}
+            title={lang === 'en' ? 'Under Research & Planning (Frozen for now)' : 'Fase Riset & Perencanaan (Dinonaktifkan sementara)'}
           >
             <Terminal size={16} />
-            <span>{t.tabs?.cli || 'CLI Program (Go)'}</span>
+            <span>{t.tabs?.cli || 'CLI Program'}</span>
           </button>
           <button
             type="button"
             role="tab"
             aria-selected={activeTab === 'native'}
-            className={`tab-btn ${activeTab === 'native' ? 'active' : ''}`}
-            onClick={() => handleTabChange('native')}
+            aria-disabled="true"
+            disabled
+            className={`tab-btn tab-btn-disabled ${activeTab === 'native' ? 'active' : ''}`}
+            title={lang === 'en' ? 'Under Research & Planning (Frozen for now)' : 'Fase Riset & Perencanaan (Dinonaktifkan sementara)'}
           >
             <Smartphone size={16} />
             <span>{t.tabs?.native || 'Native Apps (Research & Plan)'}</span>

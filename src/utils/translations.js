@@ -91,7 +91,7 @@ export const translations = {
       langToggle: 'ID'
     },
     hero: {
-      tag: 'Muslim Utilities',
+      tag: 'Productivity Tool',
       title: 'Zen Clock: Pomodoro & Muslim Prayer Times',
       subtitle: 'Tetap Fokus & Ingat Waktu sebagai Muslim.',
       allAppsBadge: 'Tersedia di berbagai platform'
@@ -102,7 +102,7 @@ export const translations = {
     tabs: {
       browser: 'Browser Extension',
       vscode: 'VS Code Extension',
-      cli: 'CLI Program (Go)',
+      cli: 'CLI Program (On Progress)',
       native: 'Native Apps (Research & Plan)'
     },
     badges: {
@@ -114,20 +114,20 @@ export const translations = {
       lightweight: 'Ultra Ringan'
     },
     browser: {
-      headline: 'Zen Clock, Jadwal Sholat serta Pomodoro di Browser Extension',
-      description: 'Zen Clock langsung dari toolbar. Praktis, ringan, dan tetap ingat waktu sebagai Muslim.',
+      headline: 'Zen Clock, Jadwal Sholat serta Pomodoro di Browser',
+      description: 'Zen Clock langsung dari toolbar. praktis, ringan, dan easy to use.',
       addChrome: 'Pasang di Chrome & Edge',
       downloadZip: 'Unduh Rilis ZIP (.zip)',
       manualInstallTitle: 'Cara Pasang Manual (Developer Mode):',
       step1: '1. Unduh dan ekstrak file ZIP rilis terbaru.',
       step2: '2. Buka chrome://extensions di browser Anda dan aktifkan "Developer Mode".',
       step3: '3. Klik "Load unpacked" dan pilih folder hasil ekstrak.',
-      feature1Title: 'Popup Cepat',
-      feature1Desc: 'Cukup 1-klik di toolbar untuk memeriksa sisa waktu menuju sholat berikutnya.',
-      feature2Title: 'Zen New Tab Desk Clock',
-      feature2Desc: 'Ubah tab baru menjadi layar jam flip meja yang elegan dan menenangkan.',
-      feature3Title: 'Audio & Desktop Notification',
-      feature3Desc: 'Notifikasi browser tetap berbunyi meski Anda sedang berselancar di tab lain.'
+      feature1Title: 'Quick Popup',
+      feature1Desc: 'Cukup klik di toolbar untuk cek waktu.',
+      feature2Title: 'Full Page Clock',
+      feature2Desc: 'Ubah tab menjadi layar jam flip.',
+      feature3Title: 'Background Notification',
+      feature3Desc: 'Notifikasi tetap berbunyi meski Anda sedang berselancar di tab lain.'
     },
     vscode: {
       headline: 'Zen Clock, Jadwal Sholat serta Pomodoro di VS Code',
@@ -146,7 +146,7 @@ export const translations = {
       feature4Desc: 'Menyesuaikan otomatis dengan tema gelap maupun terang VS Code Anda.'
     },
     cli: {
-      headline: 'Zen Clock, Jadwal Sholat serta Pomodoro di Terminal Favoritmu',
+      headline: 'Zen Clock, Jadwal Sholat serta Pomodoro di Terminal',
       description: 'Buat kamu yang sering kerja di terminal.',
       tabBrew: 'Homebrew (macOS/Linux)',
       tabGo: 'Go Install',
@@ -274,7 +274,7 @@ export const translations = {
       langToggle: 'EN'
     },
     hero: {
-      tag: 'Muslim Utilities',
+      tag: 'Productivity Tool',
       title: 'Zen Clock: Pomodoro & Muslim Prayer Times',
       subtitle: 'Stay Focused & Remember Time as a Muslim.',
       allAppsBadge: 'Available across all platforms'
@@ -285,7 +285,7 @@ export const translations = {
     tabs: {
       browser: 'Browser Extension',
       vscode: 'VS Code Extension',
-      cli: 'CLI Program (Go)',
+      cli: 'CLI Program (On Progress)',
       native: 'Native Apps (Research & Plan)'
     },
     badges: {
@@ -297,7 +297,7 @@ export const translations = {
       lightweight: 'Ultra Lightweight'
     },
     browser: {
-      headline: 'Zen Clock, Prayer Schedule & Pomodoro on Browser Extension',
+      headline: 'Zen Clock, Prayer Schedule & Pomodoro on Browser',
       description: 'Zen Clock on your toolbar with Prayer Schedule and Pomodoro. Fast, lightweight, and easy to use.',
       addChrome: 'Add to Chrome & Edge',
       downloadZip: 'Download ZIP Release (.zip)',
@@ -306,10 +306,10 @@ export const translations = {
       step2: '2. Navigate to chrome://extensions and enable "Developer Mode".',
       step3: '3. Click "Load unpacked" and select the extracted folder.',
       feature1Title: 'Quick Popup',
-      feature1Desc: 'One click in your toolbar to check exact prayer times and start Pomodoro.',
-      feature2Title: 'Zen New Tab Desk Clock',
-      feature2Desc: 'Turn every new tab into an aesthetic, distraction-free flip desk clock.',
-      feature3Title: 'Audio & Desktop Alerts',
+      feature1Desc: 'One click in your toolbar to check times.',
+      feature2Title: 'Full Page Clock',
+      feature2Desc: 'Turn your tab into an aesthetic, distraction-free flip desk clock.',
+      feature3Title: 'Background Notification',
       feature3Desc: 'Native desktop notifications sound even while browsing other tabs.'
     },
     vscode: {
@@ -330,7 +330,7 @@ export const translations = {
     },
     cli: {
       headline: 'Zen Clock, Prayer Schedule & Pomodoro on Terminal',
-      description: 'Built for terminal muslim users.',
+      description: 'Built for terminal users.',
       tabBrew: 'Homebrew (macOS/Linux)',
       tabGo: 'Go Install',
       tabCurl: 'Curl Script',

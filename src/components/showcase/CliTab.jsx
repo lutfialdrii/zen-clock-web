@@ -57,8 +57,8 @@ export default function CliTab({ t: propT }) {
       {/* Header & Status Badge */}
       <div className="tab-header">
         <div className="tab-status-badge">
-          <span className="zen-pulse-dot in-dev" />
-          <span className="badge-text">{t.badges?.inDev || 'Dalam Pengembangan'}</span>
+          <span className="zen-pulse-dot roadmap" />
+          <span className="badge-text">{t.badges?.researchPlan || 'Research & Plan'}</span>
           <span className="badge-subtext">Go 1.23+ · Ultra-lightweight (&lt;10MB RAM)</span>
         </div>
         <h2 className="tab-headline">{t.cli?.headline}</h2>

@@ -258,6 +258,26 @@
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), 0 0 14px rgba(251, 191, 36, 0.1);
 }
 
+.tab-btn:disabled,
+.tab-btn-disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: auto;
+  user-select: none;
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.tab-btn:disabled:hover,
+.tab-btn-disabled:hover {
+  color: var(--zen-text-muted, #94a3b8) !important;
+  background: transparent !important;
+  border-color: transparent !important;
+  transform: none !important;
+  cursor: not-allowed;
+}
+
 /* --------------------------------------------------------------------------
    Active Tab Panel & Container
    -------------------------------------------------------------------------- */
