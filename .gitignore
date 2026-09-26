@@ -23,3 +23,9 @@ dist-ssr
 *.sln
 *.sw?
 .superpowers/
+
+
+# Excluded documentation
+docs/BRANCHING_STRATEGY.md
+docs/DEV_LOG.md
+docs/NOTES.md
