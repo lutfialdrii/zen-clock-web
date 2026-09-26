@@ -12,11 +12,23 @@ Dokumen ini memantau milestone, status implementasi fitur, dan roadmap dari **Ze
 | **Fase 2: VS Code Extension Bridge** | Landing page `/extension` | ✅ **Selesai** | 2026-09-25 | Promosi rilis awal Visual Studio Marketplace |
 | **Fase 3: Central Ecosystem Hub** | Hub landing page terpadu di `/apps` | ✅ **Selesai** | 2026-09-26 | Arsitektur SPA multi-tab, i18n, design tokens |
 | **Fase 4: Web Clock Feature Parity** | Paritas Kustomisasi & Modals dengan Extension | ✅ **Selesai** | 2026-09-26 | SettingsModal, CityPicker (539+ kota), AdjustModal, Theme |
+| **Fase 4.1: Product Reordering & Copy Refinement** | Browser #1, "Zen Clock Apps", Narasi Luwes | ✅ **Selesai** | 2026-09-26 | Browser Extension default, gaya bahasa ramah & natural |
 | **Fase 5: Audio & Deployment** | Audio Adzan, Gentle Chime, CI/CD Hosting | ⏳ **Backlog** | Q4 2026 | Cloudflare Pages / Vercel rewrite & automated test |
 
 ---
 
 ## ✅ Rincian Milestone yang Telah Selesai
+
+### Fase 4.1: Product Reordering & Copy Refinement (Selesai: 2026-09-26)
+- [x] **Standarisasi Penamaan "Zen Clock Apps"**:
+  - Mengganti istilah "Ekosistem" menjadi "Zen Clock Apps" di seluruh navigasi, hero, settings modal widget, dan dock.
+- [x] **Reordering Tab Produk (Browser Extension #1)**:
+  - Browser Extension diposisikan sebagai produk unggulan #1 dan default tab di `/apps`.
+  - Urutan tab terpadu: Browser Extension ➔ VS Code Extension ➔ CLI Program ➔ Native & Mobile Roadmap.
+- [x] **Penyempurnaan Gaya Bahasa Luwes & Ramah Pengguna (Human-like Copy)**:
+  - Hero Tag: "Alat Fokus & Pengingat Waktu untuk Muslim".
+  - Hero Subtitle: "Fokus dan Tetap Ingat Waktu sebagai Muslim.".
+  - Tone-of-voice hangat, komunikatif, dan alami bagi target pengguna Indonesia di seluruh tab.
 
 ### Fase 4: Standalone Web Clock Customization & Feature Parity (Selesai: 2026-09-26)
 - [x] **Paritas Bilah Kontrol Atas (`.deskclock-top-bar`)**:

@@ -8,9 +8,9 @@ import { useLanguage } from '../../utils/i18n';
 import './AppsShowcase.css';
 
 const GITHUB_REPO_URL = 'https://github.com/lutfialdrii/zen-clock';
-const VALID_TABS = ['vscode', 'browser', 'cli', 'native'];
+const VALID_TABS = ['browser', 'vscode', 'cli', 'native'];
 
-export default function AppsShowcase({ onBackToClock, initialTab = 'vscode' }) {
+export default function AppsShowcase({ onBackToClock, initialTab = 'browser' }) {
   const { lang, changeLanguage, t } = useLanguage();
 
   const getHashTab = () => {
@@ -61,7 +61,7 @@ export default function AppsShowcase({ onBackToClock, initialTab = 'vscode' }) {
 
         <div className="nav-brand-title">
           <span className="brand-dot">✦</span>
-          <span>{t.nav?.appsTitle || 'Zen Clock Ecosystem'}</span>
+          <span>{t.nav?.appsTitle || 'Zen Clock Apps'}</span>
         </div>
 
         <div className="nav-right-actions">
@@ -111,22 +111,22 @@ export default function AppsShowcase({ onBackToClock, initialTab = 'vscode' }) {
           <button
             type="button"
             role="tab"
-            aria-selected={activeTab === 'vscode'}
-            className={`tab-btn ${activeTab === 'vscode' ? 'active' : ''}`}
-            onClick={() => handleTabChange('vscode')}
-          >
-            <Code size={16} />
-            <span>{t.tabs?.vscode || 'VS Code Extension'}</span>
-          </button>
-          <button
-            type="button"
-            role="tab"
             aria-selected={activeTab === 'browser'}
             className={`tab-btn ${activeTab === 'browser' ? 'active' : ''}`}
             onClick={() => handleTabChange('browser')}
           >
             <Globe size={16} />
             <span>{t.tabs?.browser || 'Browser Extension'}</span>
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeTab === 'vscode'}
+            className={`tab-btn ${activeTab === 'vscode' ? 'active' : ''}`}
+            onClick={() => handleTabChange('vscode')}
+          >
+            <Code size={16} />
+            <span>{t.tabs?.vscode || 'VS Code Extension'}</span>
           </button>
           <button
             type="button"
@@ -153,8 +153,8 @@ export default function AppsShowcase({ onBackToClock, initialTab = 'vscode' }) {
 
       {/* Active Tab Panel */}
       <main className="tab-render-container" role="tabpanel">
-        {activeTab === 'vscode' && <VSCodeTab t={t} />}
         {activeTab === 'browser' && <BrowserTab t={t} />}
+        {activeTab === 'vscode' && <VSCodeTab t={t} />}
         {activeTab === 'cli' && <CliTab t={t} />}
         {activeTab === 'native' && <NativeTab t={t} />}
       </main>

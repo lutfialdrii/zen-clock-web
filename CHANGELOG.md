@@ -7,6 +7,36 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 
 
 ---
 
+## [0.2.2] - 2026-09-26 — Zen Clock Apps Reordering & Human-Like Copy Refinement
+
+### 🇮🇩 Bahasa Indonesia
+
+#### ✨ Pembaruan Narasi & Hirarki Produk
+- **Standarisasi Penamaan "Zen Clock Apps"**:
+  - Menggantikan istilah formal *"Ekosistem"* menjadi **"Zen Clock Apps"** di seluruh halaman dan antarmuka.
+- **Reordering Produk (Browser Extension #1)**:
+  - Memposisikan **Browser Extension** sebagai produk unggulan utama (#1) yang langsung aktif dan terlihat pertama kali saat membuka `/apps`, disusul oleh VS Code Extension (#2), CLI Program (#3), dan Roadmap Aplikasi Native (#4).
+- **Penyempurnaan Gaya Bahasa Luwes & Alami (Human-like Copy)**:
+  - **Hero Tag**: *"Alat Fokus & Pengingat Waktu untuk Muslim"*.
+  - **Hero Subtitle**: *"Fokus dan Tetap Ingat Waktu sebagai Muslim."*.
+  - **Dock Button**: *"✦ Explore Zen Clock Apps (Browser Extension, VS Code Extension & CLI) →"*.
+  - **Browser Tab**: Headline: *"Flip Clock, Jadwal Reminder Sholat serta Pomodoro di Browser Extension"* — Deskripsi: *"Zen Clock langsung dari toolbar. Praktis, ringan, dan tetap ingat waktu sebagai Muslim."*.
+  - **VS Code Tab**: Headline: *"Zen Clock, Jadwal Sholat serta Pomodoro di VS Code"* — Deskripsi: *"Fokus dan Tetap Ingat Waktu sebagai Muslim walau keasikan ngoding."*.
+  - **CLI Tab**: Headline: *"Zen Clock, Jadwal Sholat serta Pomodoro di Terminal Favoritmu"* — Deskripsi: *"Buat kamu yang sering kerja di terminal."*.
+  - **Native Tab**: Headline: *"Rencana Aplikasi Desktop & Mobile"* — Deskripsi: *"Zen Clock rencananya bakal hadir langsung di Menu Bar macOS, Windows Tray, Linux, dan aplikasi mobile (Android & iOS)."*.
+
+### 🇬🇧 English
+
+#### ✨ Product Hierarchy & Copy Refinement
+- **Standardized "Zen Clock Apps" Branding**:
+  - Replaced the formal "Ecosystem" term with clean and friendly "Zen Clock Apps" across all landing views and modals.
+- **Browser Extension as Primary Product (#1)**:
+  - Set Browser Extension as the default landing tab and top product hierarchy in the `/apps` showcase and quick discovery links.
+- **Friendly & Natural Tone-of-Voice**:
+  - Polished taglines, headlines, and descriptions across Indonesian and English dictionaries.
+
+---
+
 ## [0.2.1] - 2026-09-26 — Standalone Web Clock Customization & Feature Parity
 
 ### 🇬🇧 English
