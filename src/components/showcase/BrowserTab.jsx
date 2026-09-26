@@ -6,12 +6,14 @@ import {
   Download,
   ExternalLink,
   ChevronDown,
-  Globe
+  Globe,
+  Star
 } from 'lucide-react';
 import { useLanguage } from '../../utils/i18n';
 
 const CHROME_STORE_URL = 'https://github.com/lutfialdrii/zen-clock/releases';
 const ZIP_RELEASE_URL = 'https://github.com/lutfialdrii/zen-clock/releases/latest';
+const GITHUB_REPO_URL = 'https://github.com/lutfialdrii/zen-clock';
 
 export default function BrowserTab({ t: propT }) {
   const { t: hookT } = useLanguage();
@@ -25,7 +27,7 @@ export default function BrowserTab({ t: propT }) {
         <div className="tab-status-badge">
           <span className="zen-pulse-dot in-dev" />
           <span className="badge-text">{t.badges?.inDev || 'Dalam Pengembangan'}</span>
-          <span className="badge-subtext">Chrome · Edge · Brave · Firefox</span>
+          <span className="badge-subtext">Chrome Web Store</span>
         </div>
         <h2 className="tab-headline">{t.browser?.headline}</h2>
         <p className="tab-description">{t.browser?.description}</p>
@@ -52,6 +54,17 @@ export default function BrowserTab({ t: propT }) {
         >
           <Download size={16} />
           <span>{t.browser?.downloadZip}</span>
+        </a>
+
+        <a 
+          href={GITHUB_REPO_URL} 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="cta-btn github-star"
+          title={t.browser?.starGitHub || t.nav?.starGitHub || 'Star on GitHub'}
+        >
+          <Star size={16} className="star-icon" />
+          <span>{t.browser?.starGitHub || t.nav?.starGitHub || 'Star on GitHub'}</span>
         </a>
       </div>
 

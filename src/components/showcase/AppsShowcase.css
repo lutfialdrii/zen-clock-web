@@ -375,7 +375,7 @@
   font-weight: 500;
   color: var(--zen-text-subtle, #64748b);
   margin-bottom: 8px;
-  text-align: left;
+  text-align: center;
 }
 
 .install-snippet-box {
@@ -514,6 +514,31 @@
   background: rgba(255, 255, 255, 0.05);
   border-color: var(--zen-border, rgba(255, 255, 255, 0.08));
   transform: translateY(-1px);
+}
+
+.cta-btn.github-star {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--zen-text-muted, #94a3b8);
+  border: 1px solid var(--zen-border, rgba(255, 255, 255, 0.1));
+}
+
+.cta-btn.github-star .star-icon {
+  color: var(--zen-amber, #fbbf24);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), fill 0.2s ease, filter 0.2s ease;
+}
+
+.cta-btn.github-star:hover {
+  color: var(--zen-text-primary, #f8fafc);
+  background: rgba(251, 191, 36, 0.08);
+  border-color: rgba(251, 191, 36, 0.35);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), 0 0 12px rgba(251, 191, 36, 0.15);
+}
+
+.cta-btn.github-star:hover .star-icon {
+  fill: var(--zen-amber, #fbbf24);
+  filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.5));
+  transform: scale(1.15) rotate(12deg);
 }
 
 .ext-icon {

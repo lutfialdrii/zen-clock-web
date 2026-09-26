@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import {
   Clock,
   Timer,
-  Sparkles,
-  ShieldCheck,
+  BookOpen,
   Download,
   ExternalLink,
   Code,
   Copy,
-  Check
+  Check,
+  Star
 } from 'lucide-react';
 import { useLanguage } from '../../utils/i18n';
 
@@ -35,7 +35,7 @@ export default function VSCodeTab({ t: propT }) {
         <div className="tab-status-badge">
           <span className="zen-pulse-dot live" />
           <span className="badge-text">{t.badges?.live || 'Live & Stable'}</span>
-          <span className="badge-subtext">VS Code & Antigravity IDE</span>
+          <span className="badge-subtext">Visual Studio Marketplace</span>
         </div>
         <h2 className="tab-headline">{t.vscode?.headline}</h2>
         <p className="tab-description">{t.vscode?.description}</p>
@@ -113,14 +113,15 @@ export default function VSCodeTab({ t: propT }) {
           href={GITHUB_REPO_URL} 
           target="_blank" 
           rel="noopener noreferrer" 
-          className="cta-btn ghost"
+          className="cta-btn github-star"
+          title={t.vscode?.starGitHub || t.nav?.starGitHub || 'Star on GitHub'}
         >
-          <ExternalLink size={16} />
-          <span>{t.vscode?.viewSource}</span>
+          <Star size={16} className="star-icon" />
+          <span>{t.vscode?.starGitHub || t.nav?.starGitHub || 'Star on GitHub'}</span>
         </a>
       </div>
 
-      {/* 4-Card Feature Grid */}
+      {/* 3-Card Feature Grid */}
       <div className="feature-card-grid">
         <div className="feature-card">
           <div className="feature-icon-box amber">
@@ -139,19 +140,11 @@ export default function VSCodeTab({ t: propT }) {
         </div>
 
         <div className="feature-card">
-          <div className="feature-icon-box emerald">
-            <Sparkles size={20} />
+          <div className="feature-icon-box indigo">
+            <BookOpen size={20} />
           </div>
           <h3 className="feature-card-title">{t.vscode?.feature3Title}</h3>
           <p className="feature-card-desc">{t.vscode?.feature3Desc}</p>
-        </div>
-
-        <div className="feature-card">
-          <div className="feature-icon-box indigo">
-            <ShieldCheck size={20} />
-          </div>
-          <h3 className="feature-card-title">{t.vscode?.feature4Title}</h3>
-          <p className="feature-card-desc">{t.vscode?.feature4Desc}</p>
         </div>
       </div>
     </div>
