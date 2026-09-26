@@ -399,13 +399,13 @@ export default function SettingsModal({
           <div className="settings-section">
             <div className="section-label">
               <Layers size={13} />
-              <span>{t.ui.ecosystemTitle || 'Ekosistem Zen Clock'}</span>
+              <span>{t.ui.ecosystemTitle || 'Zen Clock Apps'}</span>
             </div>
             <div
               className="settings-action-row ecosystem-action-row"
               onClick={() => {
                 onClose();
-                if (onOpenEcosystem) onOpenEcosystem('vscode');
+                if (onOpenEcosystem) onOpenEcosystem('browser');
               }}
               role="button"
               tabIndex={0}

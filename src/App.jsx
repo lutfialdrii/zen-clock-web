@@ -22,18 +22,18 @@ import { calculatePrayerTimes, shouldTriggerPrayerAlert } from './utils/prayerHe
 import './index.css';
 
 const resolveCurrentRoute = () => {
-  if (typeof window === 'undefined') return { route: 'app', tab: 'vscode' };
+  if (typeof window === 'undefined') return { route: 'app', tab: 'browser' };
   const path = window.location.pathname.toLowerCase();
   const hash = window.location.hash.toLowerCase();
 
   if (path.startsWith('/apps')) {
-    const tab = hash.replace('#', '') || 'vscode';
+    const tab = hash.replace('#', '') || 'browser';
     return { route: 'apps', tab };
   }
   if (path.startsWith('/extension') || hash.includes('extension')) {
-    return { route: 'apps', tab: 'vscode' };
+    return { route: 'apps', tab: 'browser' };
   }
-  return { route: 'app', tab: 'vscode' };
+  return { route: 'app', tab: 'browser' };
 };
 
 function App() {
@@ -186,7 +186,7 @@ function App() {
     }
   };
 
-  const navigateTo = (route, tab = 'vscode') => {
+  const navigateTo = (route, tab = 'browser') => {
     setNavState({ currentRoute: route, initialShowcaseTab: tab });
     if (route === 'apps') {
       window.history.pushState({}, '', `/apps#${tab}`);
@@ -337,12 +337,12 @@ function App() {
       {/* Below-the-fold Ecosystem Discovery Section (Revealed on Scroll) */}
       <section className="deskclock-below-fold-section">
         <span className="deskclock-below-fold-caption">
-          {currentLang === 'en' ? 'Zen Clock Multi-Platform' : 'Ekosistem Zen Clock'}
+          Zen Clock Apps
         </span>
         <button
           type="button"
           className="zen-dock-link"
-          onClick={() => navigateTo('apps', 'vscode')}
+          onClick={() => navigateTo('apps', 'browser')}
           title="Explore Zen Clock Apps"
         >
           <span>{t.dock?.exploreEcosystem}</span>
@@ -382,7 +382,7 @@ function App() {
         }}
         onOpenEcosystem={(tab) => {
           setIsSettingsOpen(false);
-          navigateTo('apps', tab || 'vscode');
+          navigateTo('apps', tab || 'browser');
         }}
       />
     </div>
