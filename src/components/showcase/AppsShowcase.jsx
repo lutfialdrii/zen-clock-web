@@ -37,7 +37,11 @@ export default function AppsShowcase({ onBackToClock, initialTab = 'vscode' }) {
 
   const handleTabChange = (tabKey) => {
     setActiveTab(tabKey);
-    window.location.hash = tabKey;
+    if (typeof window !== 'undefined' && window.history?.replaceState) {
+      window.history.replaceState(null, '', '#' + tabKey);
+    } else {
+      window.location.hash = tabKey;
+    }
   };
 
   return (
