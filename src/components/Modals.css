@@ -1010,3 +1010,23 @@ input:checked + .slider:before {
   transform: translate(1px, -1px);
 }
 
+/* Ecosystem CTA Row in Settings Modal */
+.ecosystem-action-row {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.06) 0%, rgba(20, 21, 26, 0.5) 100%);
+  border: 1px solid rgba(251, 191, 36, 0.22);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ecosystem-action-row:hover {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.12) 0%, rgba(28, 30, 36, 0.7) 100%);
+  border-color: rgba(251, 191, 36, 0.45);
+  transform: translateY(-1px);
+}
+
+.ecosystem-icon-glow {
+  background: rgba(251, 191, 36, 0.15);
+  color: var(--zen-accent, #fbbf24);
+  box-shadow: 0 0 10px rgba(251, 191, 36, 0.2);
+}
+
+

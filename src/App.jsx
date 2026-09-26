@@ -234,102 +234,111 @@ function App() {
 
   return (
     <div className="app-container">
-      {/* Top Header Controls Bar (Parity with DeskClockPage) */}
-      <header className="deskclock-top-bar">
-        <div className="deskclock-left">
-          <div className="deskclock-brand">
-            <Clock size={16} className="brand-icon" />
-            <span className="brand-name">Zen Clock</span>
+      {/* Viewport Hero Section (Full 100vh on Desktop - Zero Distractions) */}
+      <div className="deskclock-hero-screen">
+        {/* Top Header Controls Bar (Parity with DeskClockPage) */}
+        <header className="deskclock-top-bar">
+          <div className="deskclock-left">
+            <div className="deskclock-brand">
+              <Clock size={16} className="brand-icon" />
+              <span className="brand-name">Zen Clock</span>
+            </div>
           </div>
-        </div>
 
-        <nav className="deskclock-tab-nav">
-          <button
-            type="button"
-            className={`deskclock-tab-btn ${activeTab === 'clock' ? 'active' : ''}`}
-            onClick={() => setActiveTab('clock')}
-            title="Clock & Prayer Times"
-          >
-            <Clock size={15} />
-            <span>{t.ui?.navClock || 'Clock'}</span>
-          </button>
-          <button
-            type="button"
-            className={`deskclock-tab-btn ${activeTab === 'pomodoro' ? 'active' : ''}`}
-            onClick={() => setActiveTab('pomodoro')}
-            title="Pomodoro Timer"
-          >
-            <Timer size={15} />
-            <span>{t.ui?.navPomodoro || 'Pomodoro'}</span>
-            {isPomodoroActive(pomodoroState) && <span className="pomodoro-active-dot" />}
-          </button>
-        </nav>
-
-        <div className="deskclock-actions">
-          {deferredPrompt && (
+          <nav className="deskclock-tab-nav">
             <button
               type="button"
-              className="deskclock-icon-btn install-btn"
-              onClick={handleInstallClick}
-              title={t.nav?.installPwa || 'Install App'}
-              aria-label="Install App"
+              className={`deskclock-tab-btn ${activeTab === 'clock' ? 'active' : ''}`}
+              onClick={() => setActiveTab('clock')}
+              title="Clock & Prayer Times"
             >
-              <Download size={16} />
-              <span>{t.nav?.installPwa || 'Install'}</span>
+              <Clock size={15} />
+              <span>{t.ui?.navClock || 'Clock'}</span>
             </button>
-          )}
-          <button
-            type="button"
-            className="deskclock-icon-btn"
-            onClick={() => setIsSettingsOpen(true)}
-            title={t.ui?.settings || 'Settings'}
-            aria-label="Settings"
-          >
-            <SettingsIcon size={18} />
-          </button>
-          <button
-            type="button"
-            className="deskclock-icon-btn"
-            onClick={toggleFullscreen}
-            title={isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
-            aria-label={isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
-          >
-            {isFullscreen ? <Minimize size={18} /> : <Maximize size={18} />}
-          </button>
-        </div>
-      </header>
+            <button
+              type="button"
+              className={`deskclock-tab-btn ${activeTab === 'pomodoro' ? 'active' : ''}`}
+              onClick={() => setActiveTab('pomodoro')}
+              title="Pomodoro Timer"
+            >
+              <Timer size={15} />
+              <span>{t.ui?.navPomodoro || 'Pomodoro'}</span>
+              {isPomodoroActive(pomodoroState) && <span className="pomodoro-active-dot" />}
+            </button>
+          </nav>
 
-      {/* Main Display: Ambient Clock or Pomodoro */}
-      <main className="app-content">
-        {activeTab === 'clock' ? (
-          <>
-            <FlipClock language={currentLang} variant="full" />
-            <PrayerTime
-              settings={settings}
-              onOpenCityPicker={() => setIsCityPickerOpen(true)}
-              onOpenAdjustModal={() => setIsAdjustOpen(true)}
-              onOpenThemeModal={() => setIsSettingsOpen(true)}
-              onToggleNotify={() =>
-                handleUpdateSettings({ notifyPrayer: settings?.notifyPrayer === false })
-              }
-              hideDeskClockButton={true}
-            />
-          </>
-        ) : (
-          <div className="deskclock-pomodoro-wrapper">
-            <PomodoroTimer
-              language={currentLang}
-              settings={settings}
-              pomodoroState={pomodoroState}
-              onPomodoroAction={handlePomodoroAction}
-              variant="full"
-            />
+          <div className="deskclock-actions">
+            {deferredPrompt && (
+              <button
+                type="button"
+                className="deskclock-icon-btn install-btn"
+                onClick={handleInstallClick}
+                title={t.nav?.installPwa || 'Install App'}
+                aria-label="Install App"
+              >
+                <Download size={16} />
+                <span>{t.nav?.installPwa || 'Install'}</span>
+              </button>
+            )}
+            <button
+              type="button"
+              className="deskclock-icon-btn"
+              onClick={() => setIsSettingsOpen(true)}
+              title={t.ui?.settings || 'Settings'}
+              aria-label="Settings"
+            >
+              <SettingsIcon size={18} />
+            </button>
+            <button
+              type="button"
+              className="deskclock-icon-btn"
+              onClick={toggleFullscreen}
+              title={isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
+              aria-label={isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
+            >
+              {isFullscreen ? <Minimize size={18} /> : <Maximize size={18} />}
+            </button>
           </div>
-        )}
-      </main>
+        </header>
 
-      {/* Subtle, Non-Intrusive Bottom Dock to Explore Other Apps */}
-      <footer className="zen-dock-footer">
+        {/* Main Display: Ambient Clock or Pomodoro */}
+        <main className="app-content">
+          {activeTab === 'clock' ? (
+            <>
+              <FlipClock language={currentLang} variant="full" />
+              <PrayerTime
+                settings={settings}
+                onOpenCityPicker={() => setIsCityPickerOpen(true)}
+                onOpenAdjustModal={() => setIsAdjustOpen(true)}
+                onOpenThemeModal={() => setIsSettingsOpen(true)}
+                onToggleNotify={() =>
+                  handleUpdateSettings({ notifyPrayer: settings?.notifyPrayer === false })
+                }
+                hideDeskClockButton={true}
+              />
+            </>
+          ) : (
+            <div className="deskclock-pomodoro-wrapper">
+              <PomodoroTimer
+                language={currentLang}
+                settings={settings}
+                pomodoroState={pomodoroState}
+                onPomodoroAction={handlePomodoroAction}
+                variant="full"
+              />
+            </div>
+          )}
+        </main>
+
+        {/* Bottom Spacer to balance hero viewport centering */}
+        <div className="deskclock-hero-spacer" />
+      </div>
+
+      {/* Below-the-fold Ecosystem Discovery Section (Revealed on Scroll) */}
+      <section className="deskclock-below-fold-section">
+        <span className="deskclock-below-fold-caption">
+          {currentLang === 'en' ? 'Zen Clock Multi-Platform' : 'Ekosistem Zen Clock'}
+        </span>
         <button
           type="button"
           className="zen-dock-link"
@@ -338,7 +347,7 @@ function App() {
         >
           <span>{t.dock?.exploreEcosystem}</span>
         </button>
-      </footer>
+      </section>
 
       {/* Modals for Customization Parity */}
       <CityPickerModal
@@ -370,6 +379,10 @@ function App() {
         onOpenAdjustModal={() => {
           setIsSettingsOpen(false);
           setIsAdjustOpen(true);
+        }}
+        onOpenEcosystem={(tab) => {
+          setIsSettingsOpen(false);
+          navigateTo('apps', tab || 'vscode');
         }}
       />
     </div>

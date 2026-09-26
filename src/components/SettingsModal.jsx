@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Settings, X, Check, Palette, Globe, Bell, Clock, Compass, MapPin, Sliders, ChevronRight, Heart, Coffee, Star, ExternalLink } from 'lucide-react';
+import { Settings, X, Check, Palette, Globe, Bell, Clock, Compass, MapPin, Sliders, ChevronRight, Heart, Coffee, Star, ExternalLink, Layers, Sparkles } from 'lucide-react';
 import { getTranslations } from '../utils/i18n.js';
 import { SUPPORT_LINKS } from '../utils/supportLinks.js';
 import './Modals.css';
@@ -29,6 +29,7 @@ export default function SettingsModal({
   onSaveSettings,
   onOpenCityPicker,
   onOpenAdjustModal,
+  onOpenEcosystem,
 }) {
   const language = settings?.language || 'id';
   const t = getTranslations(language);
@@ -390,6 +391,41 @@ export default function SettingsModal({
                     }))
                   }
                 />
+              </div>
+            </div>
+          </div>
+
+          {/* Section: Zen Clock Ecosystem CTA */}
+          <div className="settings-section">
+            <div className="section-label">
+              <Layers size={13} />
+              <span>{t.ui.ecosystemTitle || 'Ekosistem Zen Clock'}</span>
+            </div>
+            <div
+              className="settings-action-row ecosystem-action-row"
+              onClick={() => {
+                onClose();
+                if (onOpenEcosystem) onOpenEcosystem('vscode');
+              }}
+              role="button"
+              tabIndex={0}
+              title={t.ui.ecosystemDesc}
+            >
+              <div className="action-row-left">
+                <div className="action-row-icon ecosystem-icon-glow">
+                  <Sparkles size={14} />
+                </div>
+                <div className="action-row-info">
+                  <div className="action-row-title-wrap">
+                    <span className="action-row-title">Zen Clock Apps</span>
+                    <span className="action-row-badge active">{t.ui.ecosystemBadge || 'Multi-Platform'}</span>
+                  </div>
+                  <span className="action-row-desc">{t.ui.ecosystemDesc}</span>
+                </div>
+              </div>
+              <div className="action-row-right">
+                <span className="action-row-btn-text">{t.ui.explore || 'Jelajahi'}</span>
+                <ChevronRight size={14} className="action-row-chevron" />
               </div>
             </div>
           </div>

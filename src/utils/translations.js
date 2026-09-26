@@ -61,6 +61,10 @@ export const translations = {
       supportSaweriaDesc: 'Dukungan donasi sukarela (GoPay, OVO, Dana, QRIS)',
       supportGitHub: 'Beri Bintang di GitHub',
       supportGitHubDesc: 'Bantu Zen Clock semakin berkembang dan menjangkau lebih banyak pengguna',
+      ecosystemTitle: 'Ekosistem Zen Clock',
+      ecosystemBadge: 'Multi-Platform',
+      ecosystemDesc: 'Tersedia untuk VS Code, Browser Extension & CLI (Go).',
+      explore: 'Jelajahi',
     },
     notifications: {
       prayerArrived: '🕌 Waktu Sholat {name} telah tiba!',
@@ -237,6 +241,10 @@ export const translations = {
       supportSaweriaDesc: 'Voluntary donation support (GoPay, OVO, Dana, QRIS)',
       supportGitHub: 'Star on GitHub',
       supportGitHubDesc: 'Help Zen Clock grow and reach more developers',
+      ecosystemTitle: 'Zen Clock Ecosystem',
+      ecosystemBadge: 'Multi-Platform',
+      ecosystemDesc: 'Available for VS Code, Browser Extension & CLI (Go).',
+      explore: 'Explore',
     },
     notifications: {
       prayerArrived: '🕌 Prayer Time for {name} has arrived!',

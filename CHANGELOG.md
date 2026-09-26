@@ -31,6 +31,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 
   - Real-time prayer call notifications and Pomodoro session completion alerts via the standard Web Notification API.
 - **Refined Desk Clock Top Controls Bar**:
   - Brand identity, tab switcher with active Pomodoro pulsing status dot, PWA install trigger, Settings modal launcher, and Fullscreen toggle.
+- **Distraction-Free 100vh Desk Clock with Below-The-Fold Ecosystem Dock**:
+  - The live clock viewport is isolated to a clean 100vh screen on desktop with zero clutter on initial load.
+  - The ecosystem explore button is tucked below the fold, appearing gracefully only when the user scrolls down.
+- **Ecosystem Call-To-Action in Settings Modal**:
+  - Added a dedicated multi-platform explore widget inside SettingsModal, allowing users to discover and switch to the ecosystem showcase directly from settings.
 
 ---
 
@@ -56,6 +61,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 
   - Pengingat adzan waktu sholat dan notifikasi selesainya sesi Pomodoro menggunakan Web Notification API standar.
 - **Bilah Kontrol Atas (Top Header Controls Bar)**:
   - Identitas Zen Clock, tab navigator dengan indikator titik hijau berdenyut saat Pomodoro aktif, tombol unduh PWA, pintasan modal pengaturan, dan tombol layar penuh (*Fullscreen*).
+- **Jam Meja Murni 100vh dengan Dock Ekosistem Below-The-Fold**:
+  - Layar jam meja diisolasi menjadi 100vh penuh tanpa gangguan visual pada tampilan pertama desktop.
+  - Tombol jelajah ekosistem diletakkan di bawah lipatan (*below the fold*) dan baru muncul saat pengguna menggulir layar (*scroll down*).
+- **Widget Call-To-Action (CTA) Ekosistem di Modal Pengaturan**:
+  - Menyematkan kartu eksplorasi aplikasi Zen Clock multi-platform di dalam SettingsModal untuk memudahkan penemuan aplikasi lain langsung dari menu pengaturan.
 
 ---
 
