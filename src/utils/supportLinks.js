@@ -17,7 +17,7 @@ export const SUPPORT_LINKS = {
   github: {
     id: 'github',
     platform: 'GitHub',
-    url: 'https://github.com/lutfialdrii/zen-clock-extension-browser',
+    url: 'https://github.com/lutfialdrii/zen-clock-web',
     type: 'star',
     labelId: 'Beri Bintang di GitHub',
     labelEn: 'Star on GitHub',

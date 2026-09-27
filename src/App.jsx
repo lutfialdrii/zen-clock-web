@@ -5,8 +5,10 @@ import PomodoroTimer from './components/PomodoroTimer';
 import CityPickerModal from './components/CityPickerModal';
 import AdjustModal from './components/AdjustModal';
 import SettingsModal from './components/SettingsModal';
-import AppsShowcase from './components/showcase/AppsShowcase';
-import { Timer, Clock, Download, Settings as SettingsIcon, Maximize, Minimize } from 'lucide-react';
+import ExplorePage from './components/explore/ExplorePage';
+import ExtensionLanding from './components/ExtensionLanding';
+import BrowserLanding from './components/browser/BrowserLanding';
+import { Timer, Clock, Download, Settings as SettingsIcon, Maximize, Minimize, Star } from 'lucide-react';
 import { useLanguage, getTranslations } from './utils/i18n';
 import {
   getSettings,
@@ -22,26 +24,44 @@ import { calculatePrayerTimes, shouldTriggerPrayerAlert } from './utils/prayerHe
 import './index.css';
 
 const resolveCurrentRoute = () => {
-  if (typeof window === 'undefined') return { route: 'app', tab: 'browser' };
+  if (typeof window === 'undefined') return { route: 'app' };
   const path = window.location.pathname.toLowerCase();
   const hash = window.location.hash.toLowerCase();
 
-  if (path.startsWith('/apps')) {
-    const tab = hash.replace('#', '') || 'browser';
-    return { route: 'apps', tab };
+  // 1. VS Code Extension dedicated page
+  if (
+    path.startsWith('/vscode') || 
+    hash.includes('vscode') || 
+    path.startsWith('/extension') || 
+    hash.includes('extension')
+  ) {
+    return { route: 'vscode' };
   }
-  if (path.startsWith('/extension') || hash.includes('extension')) {
-    return { route: 'apps', tab: 'browser' };
+
+  // 2. Browser Extension dedicated page
+  if (path.startsWith('/browser') || hash.includes('browser')) {
+    return { route: 'browser' };
   }
-  return { route: 'app', tab: 'browser' };
+
+  // 3. Bridging / Ecosystem explore page
+  if (
+    path.startsWith('/explore') || 
+    hash.includes('explore') || 
+    path.startsWith('/apps') || 
+    hash.includes('apps')
+  ) {
+    return { route: 'explore' };
+  }
+
+  return { route: 'app' };
 };
 
 function App() {
   const { lang, setLang } = useLanguage();
   const [activeTab, setActiveTab] = useState('clock'); // 'clock' | 'pomodoro'
-  const [{ currentRoute, initialShowcaseTab }, setNavState] = useState(() => {
-    const { route, tab } = resolveCurrentRoute();
-    return { currentRoute: route, initialShowcaseTab: tab };
+  const [{ currentRoute }, setNavState] = useState(() => {
+    const { route } = resolveCurrentRoute();
+    return { currentRoute: route };
   });
   const [settings, setSettings] = useState(null);
   const [pomodoroState, setPomodoroState] = useState(null);
@@ -150,8 +170,8 @@ function App() {
 
   useEffect(() => {
     const handlePopState = () => {
-      const { route, tab } = resolveCurrentRoute();
-      setNavState({ currentRoute: route, initialShowcaseTab: tab });
+      const { route } = resolveCurrentRoute();
+      setNavState({ currentRoute: route });
     };
 
     window.addEventListener('popstate', handlePopState);
@@ -186,12 +206,11 @@ function App() {
     }
   };
 
-  const navigateTo = (route, tab = 'browser') => {
-    setNavState({ currentRoute: route, initialShowcaseTab: tab });
-    if (route === 'apps') {
-      window.history.pushState({}, '', `/apps#${tab}`);
-    } else {
-      window.history.pushState({}, '', '/');
+  const navigateTo = (route) => {
+    setNavState({ currentRoute: route });
+    if (typeof window !== 'undefined' && window.history?.pushState) {
+      const url = route === 'app' ? '/' : `/${route}`;
+      window.history.pushState({ route }, '', url);
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -223,11 +242,29 @@ function App() {
   const currentLang = settings?.language || lang || 'id';
   const t = getTranslations(currentLang);
 
-  if (currentRoute === 'apps') {
+  if (currentRoute === 'explore') {
     return (
-      <AppsShowcase
-        initialTab={initialShowcaseTab}
+      <ExplorePage
         onBackToClock={() => navigateTo('app')}
+        onNavigate={(dest) => navigateTo(dest)}
+      />
+    );
+  }
+
+  if (currentRoute === 'vscode') {
+    return (
+      <ExtensionLanding
+        onBackToClock={() => navigateTo('app')}
+        onBackToExplore={() => navigateTo('explore')}
+      />
+    );
+  }
+
+  if (currentRoute === 'browser') {
+    return (
+      <BrowserLanding
+        onBackToClock={() => navigateTo('app')}
+        onBackToExplore={() => navigateTo('explore')}
       />
     );
   }
@@ -280,6 +317,16 @@ function App() {
                 <span>{t.nav?.installPwa || 'Install'}</span>
               </button>
             )}
+            <a
+              href="https://github.com/lutfialdrii/zen-clock-web"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="deskclock-icon-btn"
+              title={t.nav?.starGitHub || 'Star di GitHub'}
+              aria-label={t.nav?.starGitHub || 'Star di GitHub'}
+            >
+              <Star size={18} />
+            </a>
             <button
               type="button"
               className="deskclock-icon-btn"
@@ -342,7 +389,7 @@ function App() {
         <button
           type="button"
           className="zen-dock-link"
-          onClick={() => navigateTo('apps', 'browser')}
+          onClick={() => navigateTo('explore')}
           title="Explore Zen Clock Apps"
         >
           <span>{t.dock?.exploreEcosystem}</span>
@@ -380,9 +427,9 @@ function App() {
           setIsSettingsOpen(false);
           setIsAdjustOpen(true);
         }}
-        onOpenEcosystem={(tab) => {
+        onOpenEcosystem={() => {
           setIsSettingsOpen(false);
-          navigateTo('apps', tab || 'browser');
+          navigateTo('explore');
         }}
       />
     </div>

@@ -7,7 +7,10 @@ import NativeTab from './NativeTab';
 import { useLanguage } from '../../utils/i18n';
 import './AppsShowcase.css';
 
-const GITHUB_REPO_URL = 'https://github.com/lutfialdrii/zen-clock';
+const GITHUB_REPOS = {
+  vscode: 'https://github.com/lutfialdrii/zen-clock',
+  browser: 'https://github.com/lutfialdrii/zen-clock-extension-browser',
+};
 const VALID_TABS = ['browser', 'vscode'];
 
 export default function AppsShowcase({ onBackToClock, initialTab = 'browser' }) {
@@ -88,7 +91,7 @@ export default function AppsShowcase({ onBackToClock, initialTab = 'browser' }) 
           </div>
 
           <a
-            href={GITHUB_REPO_URL}
+            href={GITHUB_REPOS[activeTab] || 'https://github.com/lutfialdrii/zen-clock-web'}
             target="_blank"
             rel="noopener noreferrer"
             className="github-star-pill"
@@ -99,13 +102,6 @@ export default function AppsShowcase({ onBackToClock, initialTab = 'browser' }) 
           </a>
         </div>
       </header>
-
-      {/* Hero Intro */}
-      <section className="showcase-hero">
-        <span className="hero-tag-pill">{t.hero?.tag}</span>
-        <h1 className="hero-title">{t.hero?.title}</h1>
-        <p className="hero-subtitle">{t.hero?.subtitle}</p>
-      </section>
 
       {/* Segmented Tab Control */}
       <div className="segmented-tab-wrapper">
