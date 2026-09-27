@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { translations } from './translations.js';
 
 const STORAGE_KEY = 'zen_clock_lang';
@@ -27,19 +27,33 @@ export function useLanguage() {
   const [lang, setLangState] = useState(getInitialLanguage);
 
   useEffect(() => {
-    const handleStorage = () => {
-      setLangState(getInitialLanguage());
+    const handleStorage = (e) => {
+      if (!e || e.key === STORAGE_KEY) {
+        setLangState(getInitialLanguage());
+      }
+    };
+    const handleCustomLang = (e) => {
+      if (e?.detail && (e.detail === 'id' || e.detail === 'en')) {
+        setLangState(e.detail);
+      }
     };
     window.addEventListener('storage', handleStorage);
-    return () => window.removeEventListener('storage', handleStorage);
+    window.addEventListener('zen_lang_changed', handleCustomLang);
+    return () => {
+      window.removeEventListener('storage', handleStorage);
+      window.removeEventListener('zen_lang_changed', handleCustomLang);
+    };
   }, []);
 
-  const changeLanguage = (newLang) => {
+  const changeLanguage = useCallback((newLang) => {
     setStoredLanguage(newLang);
     setLangState(newLang);
-  };
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('zen_lang_changed', { detail: newLang }));
+    }
+  }, []);
 
-  const t = translations[lang] || translations.id;
+  const t = useMemo(() => translations[lang] || translations.id, [lang]);
 
   return { lang, changeLanguage, setLang: changeLanguage, t };
 }
@@ -47,3 +61,4 @@ export function useLanguage() {
 export function getTranslations(lang = 'id') {
   return translations[lang] || translations.id;
 }
+

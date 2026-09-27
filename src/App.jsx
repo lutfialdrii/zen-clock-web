@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import FlipClock from './components/FlipClock';
 import PrayerTime from './components/PrayerTime';
 import PomodoroTimer from './components/PomodoroTimer';
@@ -59,6 +59,11 @@ const resolveCurrentRoute = () => {
 
 function App() {
   const { lang, setLang } = useLanguage();
+  const langRef = useRef(lang);
+  useEffect(() => {
+    langRef.current = lang;
+  }, [lang]);
+
   const [activeTab, setActiveTab] = useState('clock'); // 'clock' | 'pomodoro'
   const [{ currentRoute }, setNavState] = useState(() => {
     const { route } = resolveCurrentRoute();
@@ -86,7 +91,7 @@ function App() {
       if (s?.accentColor) {
         applyAccentColor(s.accentColor);
       }
-      if (s?.language && s.language !== lang) {
+      if (s?.language && s.language !== langRef.current) {
         setLang(s.language);
       }
     });
@@ -104,7 +109,7 @@ function App() {
       if (newSettings?.accentColor) {
         applyAccentColor(newSettings.accentColor);
       }
-      if (newSettings?.language && newSettings.language !== lang) {
+      if (newSettings?.language && newSettings.language !== langRef.current) {
         setLang(newSettings.language);
       }
     };
@@ -121,7 +126,7 @@ function App() {
           if (s?.accentColor) {
             applyAccentColor(s.accentColor);
           }
-          if (s?.language && s.language !== lang) {
+          if (s?.language && s.language !== langRef.current) {
             setLang(s.language);
           }
         });
@@ -147,7 +152,7 @@ function App() {
       window.removeEventListener('storage', handleNativeStorage);
       document.removeEventListener('fullscreenchange', handleFullscreenChange);
     };
-  }, [lang, setLang]);
+  }, [setLang]);
 
   // Background ticker for Pomodoro completion and Prayer notification
   useEffect(() => {
