@@ -1,7 +1,7 @@
 # ⏰ Zen Clock: Pomodoro & Muslim Prayer Times
 
 <p align="center">
-  <img src="./public/assets/preview-fullview.png" alt="Zen Clock Preview" width="100%" />
+  <img src="./public/assets/preview-web.png" alt="Zen Clock Preview" width="100%" />
 </p>
 
 <p align="center">
