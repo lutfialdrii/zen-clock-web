@@ -204,7 +204,7 @@ export const translations = {
       feedbackBtn: 'Ajukan Ide & Diskusi'
     },
     footer: {
-      copyright: 'Zen Clock Apps — Diciptakan dengan cinta untuk produktivitas & ketenangan.',
+      copyright: 'Zen Clock Apps',
       mit: 'Lisensi Open Source MIT'
     }
   },
@@ -413,7 +413,7 @@ export const translations = {
       feedbackBtn: 'Request Feature & Discussion'
     },
     footer: {
-      copyright: 'Zen Clock Apps — Crafted with peace for productivity and spiritual mindfulness.',
+      copyright: 'Zen Clock Apps',
       mit: 'MIT Open Source License'
     }
   }

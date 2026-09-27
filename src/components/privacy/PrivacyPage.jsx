@@ -237,7 +237,7 @@ export default function PrivacyPage({ onBackToClock, onBackToExplore }) {
 
         {/* Footer */}
         <footer className="privacy-footer">
-          <p>© 2026 Zen Clock. Crafted with care for focus, peace, and punctuality.</p>
+          <p>© 2026 Zen Clock Apps</p>
         </footer>
       </main>
     </div>
