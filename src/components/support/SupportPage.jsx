@@ -152,7 +152,7 @@ export default function SupportPage({ onBackToClock, onBackToExplore, onNavigate
               <Heart size={14} className="heart-icon" />
               <span>Support Creator</span>
             </div>
-            <h3>{isEn ? "Help Zen Clock keep develop" : "Bantu Zen Clock terus update"}</h3>
+            <h3>{isEn ? "Help Zen Clock keep develop!" : "Bantu Zen Clock terus berkembang!"}</h3>
             <p>
               {isEn 
                 ? "If you find it helpful for your productivity, consider buying a coffee or giving a GitHub star."
