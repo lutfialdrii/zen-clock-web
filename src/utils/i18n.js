@@ -41,7 +41,7 @@ export function useLanguage() {
 
   const t = translations[lang] || translations.id;
 
-  return { lang, changeLanguage, t };
+  return { lang, changeLanguage, setLang: changeLanguage, t };
 }
 
 export function getTranslations(lang = 'id') {

@@ -72,11 +72,20 @@ export async function getSettings() {
     const local = localStorage.getItem(STORAGE_KEYS.SETTINGS);
     if (!local) return { ...DEFAULT_SETTINGS };
     const parsed = JSON.parse(local);
+    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+      return { ...DEFAULT_SETTINGS };
+    }
+
+    // Defensive check on accentColor: ensure it's a valid hex or fallback to default
+    const isValidHex = typeof parsed.accentColor === 'string' && /^#([0-9A-F]{3}){1,2}$/i.test(parsed.accentColor);
+    const safeAccentColor = isValidHex ? parsed.accentColor : DEFAULT_SETTINGS.accentColor;
+
     return {
       ...DEFAULT_SETTINGS,
       ...parsed,
-      city: { ...DEFAULT_SETTINGS.city, ...(parsed.city || {}) },
-      adjustments: { ...DEFAULT_SETTINGS.adjustments, ...(parsed.adjustments || {}) },
+      accentColor: safeAccentColor,
+      city: { ...DEFAULT_SETTINGS.city, ...(typeof parsed.city === 'object' && parsed.city !== null ? parsed.city : {}) },
+      adjustments: { ...DEFAULT_SETTINGS.adjustments, ...(typeof parsed.adjustments === 'object' && parsed.adjustments !== null ? parsed.adjustments : {}) },
     };
   } catch (err) {
     console.error('getSettings error:', err);
@@ -127,6 +136,9 @@ export async function getPomodoroState() {
     const local = localStorage.getItem(STORAGE_KEYS.POMODORO);
     if (!local) return { ...DEFAULT_POMODORO };
     const parsed = JSON.parse(local);
+    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+      return { ...DEFAULT_POMODORO };
+    }
     return { ...DEFAULT_POMODORO, ...parsed };
   } catch {
     return { ...DEFAULT_POMODORO };
@@ -153,12 +165,21 @@ export async function savePomodoroState(partial) {
 
 export async function getLastRemindedPrayer() {
   if (typeof window === 'undefined') return null;
-  return localStorage.getItem(STORAGE_KEYS.LAST_REMINDED);
+  try {
+    return localStorage.getItem(STORAGE_KEYS.LAST_REMINDED);
+  } catch (err) {
+    console.warn('getLastRemindedPrayer error:', err);
+    return null;
+  }
 }
 
 export async function setLastRemindedPrayer(reminderId) {
   if (typeof window === 'undefined') return;
-  localStorage.setItem(STORAGE_KEYS.LAST_REMINDED, reminderId);
+  try {
+    localStorage.setItem(STORAGE_KEYS.LAST_REMINDED, reminderId);
+  } catch (err) {
+    console.warn('setLastRemindedPrayer error:', err);
+  }
 }
 
 /**

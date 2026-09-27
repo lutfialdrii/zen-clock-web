@@ -19,6 +19,7 @@ import {
   completePomodoroSession,
   getLastRemindedPrayer,
   setLastRemindedPrayer,
+  STORAGE_KEYS,
 } from './utils/storage';
 import { calculatePrayerTimes, shouldTriggerPrayerAlert } from './utils/prayerHelper';
 import './index.css';
@@ -74,10 +75,16 @@ function App() {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   useEffect(() => {
+    const applyAccentColor = (color) => {
+      if (typeof color === 'string' && /^#([0-9A-F]{3}){1,2}$/i.test(color)) {
+        document.documentElement.style.setProperty('--zen-accent', color);
+      }
+    };
+
     getSettings().then((s) => {
       setSettings(s);
       if (s?.accentColor) {
-        document.documentElement.style.setProperty('--zen-accent', s.accentColor);
+        applyAccentColor(s.accentColor);
       }
       if (s?.language && s.language !== lang) {
         setLang(s.language);
@@ -95,7 +102,7 @@ function App() {
       const newSettings = e.detail;
       setSettings(newSettings);
       if (newSettings?.accentColor) {
-        document.documentElement.style.setProperty('--zen-accent', newSettings.accentColor);
+        applyAccentColor(newSettings.accentColor);
       }
       if (newSettings?.language && newSettings.language !== lang) {
         setLang(newSettings.language);
@@ -106,17 +113,38 @@ function App() {
       setPomodoroState(e.detail);
     };
 
+    // Cross-tab synchronization via browser native storage event
+    const handleNativeStorage = (e) => {
+      if (e.key === STORAGE_KEYS.SETTINGS) {
+        getSettings().then((s) => {
+          setSettings(s);
+          if (s?.accentColor) {
+            applyAccentColor(s.accentColor);
+          }
+          if (s?.language && s.language !== lang) {
+            setLang(s.language);
+          }
+        });
+      } else if (e.key === STORAGE_KEYS.POMODORO) {
+        getPomodoroState().then((p) => {
+          setPomodoroState(p);
+        });
+      }
+    };
+
     const handleFullscreenChange = () => {
       setIsFullscreen(!!document.fullscreenElement);
     };
 
     window.addEventListener('zen_settings_changed', handleSettingsChanged);
     window.addEventListener('zen_pomodoro_changed', handlePomodoroChanged);
+    window.addEventListener('storage', handleNativeStorage);
     document.addEventListener('fullscreenchange', handleFullscreenChange);
 
     return () => {
       window.removeEventListener('zen_settings_changed', handleSettingsChanged);
       window.removeEventListener('zen_pomodoro_changed', handlePomodoroChanged);
+      window.removeEventListener('storage', handleNativeStorage);
       document.removeEventListener('fullscreenchange', handleFullscreenChange);
     };
   }, [lang, setLang]);
@@ -218,7 +246,7 @@ function App() {
   const handleUpdateSettings = async (partial) => {
     const updated = await saveSettings(partial);
     setSettings(updated);
-    if (updated.accentColor) {
+    if (updated.accentColor && /^#([0-9A-F]{3}){1,2}$/i.test(updated.accentColor)) {
       document.documentElement.style.setProperty('--zen-accent', updated.accentColor);
     }
     if (updated.language) {
