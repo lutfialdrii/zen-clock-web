@@ -239,6 +239,15 @@ export default function ExplorePage({ onBackToClock, onNavigate }) {
           >
             Privacy Policy
           </button>
+          {' '}•{' '}
+          <button 
+            type="button" 
+            onClick={() => onNavigate('support')} 
+            className="footer-support-btn"
+            style={{ background: 'none', border: 'none', color: 'inherit', textDecoration: 'underline', cursor: 'pointer', font: 'inherit', padding: 0 }}
+          >
+            Help & Support
+          </button>
         </p>
       </footer>
     </div>

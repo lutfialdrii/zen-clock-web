@@ -9,6 +9,7 @@ import ExplorePage from './components/explore/ExplorePage';
 import ExtensionLanding from './components/ExtensionLanding';
 import BrowserLanding from './components/browser/BrowserLanding';
 import PrivacyPage from './components/privacy/PrivacyPage';
+import SupportPage from './components/support/SupportPage';
 import NotificationBanner from './components/notification/NotificationBanner';
 import ReminderModal from './components/reminder/ReminderModal';
 import { playAudioChime } from './utils/notification';
@@ -70,6 +71,16 @@ const resolveCurrentRoute = () => {
   // 5. Prayer Reminder dedicated view (/reminder or #reminder)
   if (path.startsWith('/reminder') || hash.includes('reminder')) {
     return { route: 'reminder' };
+  }
+
+  // 6. Support & Help Center page (/support, /help, #support, or #help)
+  if (
+    path.startsWith('/support') ||
+    path.startsWith('/help') ||
+    hash.includes('support') ||
+    hash.includes('help')
+  ) {
+    return { route: 'support' };
   }
 
   return { route: 'app' };
@@ -365,6 +376,15 @@ function App() {
         language={currentLang}
         onClose={() => navigateTo('app')}
         onBackToClock={() => navigateTo('app')}
+      />
+    );
+  }
+
+  if (currentRoute === 'support') {
+    return (
+      <SupportPage
+        onBackToClock={() => navigateTo('app')}
+        onBackToExplore={() => navigateTo('explore')}
       />
     );
   }

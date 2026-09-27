@@ -302,6 +302,14 @@ export default function BrowserLanding({ onBackToClock, onBackToExplore, onNavig
           >
             {isEn ? "Privacy Policy" : "Kebijakan Privasi"}
           </button>
+          {' '}•{' '}
+          <button 
+            type="button" 
+            onClick={() => onNavigate ? onNavigate('support') : (window.location.href = '/support')} 
+            style={{ background: 'none', border: 'none', color: 'inherit', textDecoration: 'underline', cursor: 'pointer', font: 'inherit', padding: 0 }}
+          >
+            {isEn ? "Help & Support" : "Bantuan & Dukungan"}
+          </button>
         </p>
       </footer>
     </div>
