@@ -16,7 +16,7 @@ export default function PrayerTime({
   const [isOpen, setIsOpen] = useState(false);
 
   const language = settings?.language || 'id';
-  const city = settings?.city || { name: 'Jakarta', region: 'DKI Jakarta', lat: -6.2088, lng: 106.8456 };
+  const city = settings?.city || { name: 'Jakarta', region: 'DKI Jakarta', lat: -6.2088, lng: 106.8456, timezone: 'Asia/Jakarta' };
   const adjustments = settings?.adjustments || {};
   const notifyEnabled = settings?.notifyPrayer !== false;
 
@@ -36,10 +36,8 @@ export default function PrayerTime({
 
   const handleOpenDeskClock = (e) => {
     e.stopPropagation();
-    if (typeof window !== 'undefined' && window.chrome?.tabs) {
-      window.chrome.tabs.create({ url: window.chrome.runtime.getURL('clock.html') });
-    } else {
-      window.open('clock.html', '_blank');
+    if (typeof window !== 'undefined') {
+      window.open('/', '_blank');
     }
   };
 

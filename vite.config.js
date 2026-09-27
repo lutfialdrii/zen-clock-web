@@ -8,20 +8,43 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['icon.svg'],
+      includeAssets: ['favicon.svg', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/icon-maskable-512.png'],
       manifest: {
-        name: 'Zen Flip Clock',
-        short_name: 'ZenClock',
-        description: 'A minimalist flip clock app',
-        theme_color: '#000000',
-        background_color: '#000000',
+        id: '/',
+        name: 'Zen Flip Clock & Prayer Times',
+        short_name: 'Zen Clock',
+        description: 'Zen Flip Clock, Jadwal Sholat Otomatis, dan Pomodoro Timer interaktif.',
+        start_url: './',
+        scope: './',
         display: 'standalone',
+        theme_color: '#0c0d10',
+        background_color: '#0c0d10',
+        orientation: 'any',
+        categories: ['utilities', 'productivity', 'lifestyle'],
         icons: [
           {
-            src: 'icon.svg',
-            sizes: '192x192 512x512',
+            src: 'icons/icon-192.png',
+            sizes: '192x192',
+            type: 'image/png',
+            purpose: 'any'
+          },
+          {
+            src: 'icons/icon-512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'any'
+          },
+          {
+            src: 'icons/icon-maskable-512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'maskable'
+          },
+          {
+            src: 'favicon.svg',
+            sizes: 'any',
             type: 'image/svg+xml',
-            purpose: 'any maskable'
+            purpose: 'any'
           }
         ]
       }

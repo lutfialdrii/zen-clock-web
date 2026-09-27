@@ -205,7 +205,7 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  margin: 20px 0 36px;
+  margin: 12px 0 28px;
   position: relative;
   overflow-x: auto;
   padding: 6px 4px;
@@ -547,6 +547,58 @@
 }
 
 /* --------------------------------------------------------------------------
+   App Preview Window Frame (macOS Style)
+   -------------------------------------------------------------------------- */
+.showcase-preview-frame {
+  width: 100%;
+  max-width: 900px;
+  background: var(--zen-surface-1, #14151a);
+  border: 1px solid var(--zen-border, rgba(255, 255, 255, 0.1));
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.7), 0 0 30px rgba(251, 191, 36, 0.05);
+  margin: 0 auto 36px;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.showcase-preview-frame:hover {
+  border-color: rgba(251, 191, 36, 0.25);
+}
+
+.showcase-window-dots {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 16px;
+  background: rgba(0, 0, 0, 0.35);
+  border-bottom: 1px solid var(--zen-border, rgba(255, 255, 255, 0.06));
+}
+
+.showcase-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.showcase-dot.red { background: #ef4444; }
+.showcase-dot.yellow { background: #eab308; }
+.showcase-dot.green { background: #22c55e; }
+
+.showcase-window-title {
+  font-size: 11px;
+  color: var(--zen-text-subtle, #64748b);
+  margin-left: 8px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.showcase-preview-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
    Feature Cards Grid
    -------------------------------------------------------------------------- */
 .feature-card-grid {
@@ -621,6 +673,38 @@
   line-height: 1.55;
   color: var(--zen-text-muted, #94a3b8);
   margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   GitHub Readme Deep-link Section
+   -------------------------------------------------------------------------- */
+.showcase-readme-section {
+  margin: 32px auto 16px;
+  text-align: center;
+  width: 100%;
+}
+
+.showcase-readme-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--zen-text-muted, #94a3b8);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 9px 18px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--zen-border, rgba(255, 255, 255, 0.08));
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.showcase-readme-link:hover {
+  color: var(--zen-amber, #fbbf24);
+  border-color: rgba(251, 191, 36, 0.35);
+  background: rgba(251, 191, 36, 0.08);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), 0 0 14px rgba(251, 191, 36, 0.12);
 }
 
 /* --------------------------------------------------------------------------

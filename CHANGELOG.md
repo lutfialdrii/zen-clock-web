@@ -7,6 +7,67 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 
 
 ---
 
+## [0.3.0] - 2026-09-27 — Multi-Page Platform Architecture, Storage Persistence & Zero-Lag Performance
+
+### 🇮🇩 Bahasa Indonesia
+
+#### ✨ Arsitektur Multi-Page & Dedicated Landing Pages
+- **Dedicated Landing Page VS Code (`/vscode` & `/extension`)**:
+  - Restorasi landing page premium mandiri dengan Hero showcase, frame preview jendela macOS editor, 6 fitur unggulan, dan integrasi tombol 1-klik / terminal CLI.
+- **Dedicated Landing Page Browser Extension (`/browser`)**:
+  - Halaman khusus untuk Chrome & Edge: Hero, frame preview jendela macOS (`preview-extension.png`), 3 pilar fitur browser, akordeon panduan instalasi manual (Developer Mode), dan rilis unduhan ZIP.
+- **Bridging Hub Ekosistem (`/explore` & `/apps`)**:
+  - Halaman etalase terpadu dengan kartu produk multi-platform, tombol navigasi cepat, section apresiasi Saweria, dan GitHub star badges.
+- **Zero-Dependency SPA Routing**:
+  - Dukungan native HTML5 History API (`pushState`/`popstate`) dengan penanganan fallback static routing via `public/_redirects` dan `vercel.json`.
+
+#### 🛡️ Ketahanan LocalStorage, Sinkronisasi Multi-Tab & Keamanan
+- **Sinkronisasi Multi-Tab Real-Time**:
+  - Menambahkan listener event native `storage` (`window.addEventListener('storage', ...)`). Perubahan kota, koreksi menit, warna tema, atau Pomodoro di Tab A langsung tersinkronisasi di Tab B tanpa refresh.
+- **Audit Keamanan & Bebas Vulnerability**:
+  - Seluruh tag `<a>` eksternal dilindungi atribut `target="_blank" rel="noopener noreferrer"`.
+  - Zero XSS: Bebas dari `dangerouslySetInnerHTML`, `innerHTML`, atau `eval()`.
+  - Sanitasi ketat regex HEX `#RRGGBB` pada warna aksen CSS `--zen-accent` dan `encodeURIComponent` pada query pencarian lokasi online Nominatim.
+- **Proteksi Error Storage**:
+  - Membungkus akses storage `getLastRemindedPrayer` dan `setLastRemindedPrayer` dengan `try...catch` agar kebal error pada mode penyamaran ketat (strict private browsing).
+  - Validasi tipe payload JSON storage untuk mencegah kerusakan state jika localStorage corrupt.
+
+#### ⚡ Optimasi Performa & Zero-Lag Navigation
+- **Eliminasi Infinite Re-Render Loop**:
+  - Menstabilkan hook `useLanguage` dengan `useCallback` dan `useMemo`, mencegah instansiasi ulang fungsi `setLang` pada setiap frame render.
+  - Memanfaatkan `useRef` di `App.jsx` agar efek inisialisasi hanya berjalan tepat 1 kali saat mount, menghasilkan navigasi instan, ringan, dan bebas lag antar halaman.
+
+---
+
+### 🇬🇧 English
+
+#### ✨ Multi-Page Platform Architecture & Dedicated Landings
+- **Dedicated VS Code Landing Page (`/vscode` & `/extension`)**:
+  - Full-featured landing page with hero frame, macOS window mockup, 6 core feature cards, screenshot gallery, and 1-click install deep links.
+- **Dedicated Browser Extension Landing Page (`/browser`)**:
+  - Chrome & Edge landing experience with developer installation accordion, ZIP release link, and macOS preview frame.
+- **Ecosystem Bridging Hub (`/explore` & `/apps`)**:
+  - Unified platform showcase cards, Saweria creator support banner, and GitHub repository star buttons.
+- **Lightweight Zero-Dependency Routing**:
+  - Native HTML5 History API (`pushState`/`popstate`) with Netlify/Cloudflare `_redirects` and Vercel routing configs.
+
+#### 🛡️ LocalStorage Resilience, Multi-Tab Sync & Security Audit
+- **Real-Time Cross-Tab Synchronization**:
+  - Native `storage` event listeners keep settings, theme colors, and Pomodoro timers synchronized instantly across multiple tabs.
+- **Comprehensive Security Posture**:
+  - Strict `rel="noopener noreferrer"` across all external links.
+  - 0 XSS vulnerabilities with automatic React JSX escaping and query URL encoding (`encodeURIComponent`).
+  - Strict CSS HEX validation protecting `--zen-accent` against injection.
+- **Defensive Error Handling**:
+  - Protected `localStorage` operations with `try/catch` and defensive JSON parsing against corrupted storage entries.
+
+#### ⚡ Performance & Hook Stabilization
+- **Infinite Render Loop Elimination**:
+  - Stabilized `useLanguage` hook via `useCallback` and `useMemo`.
+  - Used `useRef` to isolate mount-time settings initialization, delivering instantaneous and butter-smooth navigation between views.
+
+---
+
 ## [0.2.3] - 2026-09-26 — Official App Title "Zen Clock: Pomodoro & Muslim Prayer Times", Unified Tab Titles & Release Statuses
 
 ### 🇮🇩 Bahasa Indonesia

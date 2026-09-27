@@ -257,6 +257,13 @@ function App() {
     if (updated.language) {
       setLang(updated.language);
     }
+    if (partial.workDuration !== undefined || partial.breakDuration !== undefined) {
+      const p = await getPomodoroState();
+      if (!p.isRunning) {
+        const syncedPomo = await executePomodoroAction('RESET_POMODORO', { mode: p.mode });
+        setPomodoroState(syncedPomo);
+      }
+    }
   };
 
   const handlePomodoroAction = async (type, payload = {}) => {

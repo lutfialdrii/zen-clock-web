@@ -13,18 +13,20 @@ import {
   ArrowLeft,
   ChevronRight,
   Terminal,
-  Globe
+  Globe,
+  Star
 } from 'lucide-react';
 import './ExtensionLanding.css';
+import { useLanguage } from '../utils/i18n';
 
 const MARKETPLACE_URL = 'https://marketplace.visualstudio.com/items?itemName=lutfialdrii.extension-clock';
 const VSCODE_DEEP_LINK = 'vscode:extension/lutfialdrii.extension-clock';
 const GITHUB_REPO_URL = 'https://github.com/lutfialdrii/zen-clock';
 const CLI_COMMAND = 'code --install-extension lutfialdrii.extension-clock';
 
-export default function ExtensionLanding({ onBackToClock }) {
+export default function ExtensionLanding({ onBackToClock, onBackToExplore }) {
+  const { lang, setLang } = useLanguage();
   const [copied, setCopied] = useState(false);
-  const [activeLang, setActiveLang] = useState('id'); // 'id' | 'en'
 
   const handleCopyCli = () => {
     navigator.clipboard.writeText(CLI_COMMAND);
@@ -32,33 +34,54 @@ export default function ExtensionLanding({ onBackToClock }) {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const isEn = activeLang === 'en';
+  const isEn = lang === 'en';
 
   return (
     <div className="landing-root">
       {/* Top Banner Navigation Bar */}
       <header className="landing-nav">
-        <button className="landing-back-btn" onClick={onBackToClock} title={isEn ? "Back to Web Clock" : "Kembali ke Web Clock"}>
-          <ArrowLeft size={16} />
-          <span>{isEn ? "Back to Web Clock" : "Buka Web Clock"}</span>
-        </button>
+        <div className="landing-nav-left">
+          {onBackToExplore && (
+            <button className="landing-back-btn" onClick={onBackToExplore} title={isEn ? "Back to Explore" : "Kembali ke Explore"}>
+              <ArrowLeft size={16} />
+              <span>{isEn ? "Explore Apps" : "Explore Apps"}</span>
+            </button>
+          )}
+          {onBackToClock && (
+            <button className="landing-back-btn subtle" onClick={onBackToClock} title={isEn ? "Open Web Clock" : "Buka Web Clock"}>
+              <Clock size={15} />
+              <span>{isEn ? "Web Clock" : "Web Clock"}</span>
+            </button>
+          )}
+        </div>
 
         <div className="landing-nav-actions">
           <div className="landing-lang-toggle">
             <button 
-              className={`lang-btn ${activeLang === 'id' ? 'active' : ''}`}
-              onClick={() => setActiveLang('id')}
+              className={`lang-btn ${lang === 'id' ? 'active' : ''}`}
+              onClick={() => setLang('id')}
             >
               ID
             </button>
             <span className="lang-divider">/</span>
             <button 
-              className={`lang-btn ${activeLang === 'en' ? 'active' : ''}`}
-              onClick={() => setActiveLang('en')}
+              className={`lang-btn ${lang === 'en' ? 'active' : ''}`}
+              onClick={() => setLang('en')}
             >
               EN
             </button>
           </div>
+
+          <a 
+            href={GITHUB_REPO_URL} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="landing-star-pill"
+            title="Star on GitHub"
+          >
+            <Star size={14} />
+            <span>GitHub</span>
+          </a>
 
           <a 
             href={MARKETPLACE_URL} 
@@ -121,6 +144,17 @@ export default function ExtensionLanding({ onBackToClock }) {
           >
             <Code size={18} />
             <span>{isEn ? "Open in VS Code (1-Click)" : "Buka di VS Code (1-Klik)"}</span>
+          </a>
+
+          <a 
+            href={GITHUB_REPO_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="cta-btn cta-star"
+            title={isEn ? "Star on GitHub" : "Star di GitHub"}
+          >
+            <Star size={17} className="star-icon" />
+            <span>{isEn ? "Star on GitHub" : "Star di GitHub"}</span>
           </a>
         </div>
 

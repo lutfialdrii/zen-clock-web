@@ -22,8 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+# Superpowers and local planning artifacts
 .superpowers/
-
+docs/superpowers/
+docs/CODE_REVIEW_AND_RELEASE_PLAN.md
 
 # Excluded documentation
 docs/BRANCHING_STRATEGY.md

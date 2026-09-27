@@ -7,13 +7,14 @@ import {
   ExternalLink,
   ChevronDown,
   Globe,
-  Star
+  Star,
+  BookOpen
 } from 'lucide-react';
 import { useLanguage } from '../../utils/i18n';
 
-const CHROME_STORE_URL = 'https://github.com/lutfialdrii/zen-clock/releases';
-const ZIP_RELEASE_URL = 'https://github.com/lutfialdrii/zen-clock/releases/latest';
-const GITHUB_REPO_URL = 'https://github.com/lutfialdrii/zen-clock';
+const CHROME_STORE_URL = 'https://github.com/lutfialdrii/zen-clock-extension-browser/releases';
+const ZIP_RELEASE_URL = 'https://github.com/lutfialdrii/zen-clock-extension-browser/releases/latest';
+const GITHUB_REPO_URL = 'https://github.com/lutfialdrii/zen-clock-extension-browser';
 
 export default function BrowserTab({ t: propT }) {
   const { t: hookT } = useLanguage();
@@ -66,6 +67,22 @@ export default function BrowserTab({ t: propT }) {
           <Star size={16} className="star-icon" />
           <span>{t.browser?.starGitHub || t.nav?.starGitHub || 'Star on GitHub'}</span>
         </a>
+      </div>
+
+      {/* Hero Preview Frame */}
+      <div className="showcase-preview-frame">
+        <div className="showcase-window-dots">
+          <span className="showcase-dot red" />
+          <span className="showcase-dot yellow" />
+          <span className="showcase-dot green" />
+          <span className="showcase-window-title">Browser Extension — Popup & Desk Clock</span>
+        </div>
+        <img 
+          src="/assets/preview-extension.png" 
+          alt="Zen Clock Browser Extension Preview" 
+          className="showcase-preview-img"
+          loading="lazy"
+        />
       </div>
 
       {/* Manual Install Accordion Toggle */}
@@ -121,6 +138,20 @@ export default function BrowserTab({ t: propT }) {
           <h3 className="feature-card-title">{t.browser?.feature3Title}</h3>
           <p className="feature-card-desc">{t.browser?.feature3Desc}</p>
         </div>
+      </div>
+
+      {/* Full Documentation Readme Link */}
+      <div className="showcase-readme-section">
+        <a 
+          href={`${GITHUB_REPO_URL}#readme`}
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="showcase-readme-link"
+        >
+          <BookOpen size={15} />
+          <span>{t.browser?.readDocumentation || 'Baca Dokumentasi & Panduan di GitHub README →'}</span>
+          <ExternalLink size={13} />
+        </a>
       </div>
     </div>
   );

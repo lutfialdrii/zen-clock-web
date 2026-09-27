@@ -121,6 +121,22 @@ export default function VSCodeTab({ t: propT }) {
         </a>
       </div>
 
+      {/* Hero Preview Frame */}
+      <div className="showcase-preview-frame">
+        <div className="showcase-window-dots">
+          <span className="showcase-dot red" />
+          <span className="showcase-dot yellow" />
+          <span className="showcase-dot green" />
+          <span className="showcase-window-title">VS Code — Zen Clock Editor View</span>
+        </div>
+        <img 
+          src="/assets/preview-fullview.png" 
+          alt="Zen Clock VS Code Extension Preview" 
+          className="showcase-preview-img"
+          loading="lazy"
+        />
+      </div>
+
       {/* 3-Card Feature Grid */}
       <div className="feature-card-grid">
         <div className="feature-card">
@@ -146,6 +162,20 @@ export default function VSCodeTab({ t: propT }) {
           <h3 className="feature-card-title">{t.vscode?.feature3Title}</h3>
           <p className="feature-card-desc">{t.vscode?.feature3Desc}</p>
         </div>
+      </div>
+
+      {/* Full Documentation Readme Link */}
+      <div className="showcase-readme-section">
+        <a 
+          href={`${GITHUB_REPO_URL}#readme`}
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="showcase-readme-link"
+        >
+          <BookOpen size={15} />
+          <span>{t.vscode?.readDocumentation || 'Baca Dokumentasi Lengkap di GitHub README →'}</span>
+          <ExternalLink size={13} />
+        </a>
       </div>
     </div>
   );

@@ -242,6 +242,74 @@
   background: rgba(255, 255, 255, 0.05);
 }
 
+.cta-star {
+  background: rgba(255, 255, 255, 0.04);
+  color: #94a3b8;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cta-star .star-icon {
+  color: #fbbf24;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), fill 0.2s ease, filter 0.2s ease;
+}
+
+.cta-star:hover {
+  color: #ffffff;
+  background: rgba(251, 191, 36, 0.08);
+  border-color: rgba(251, 191, 36, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3), 0 0 14px rgba(251, 191, 36, 0.15);
+}
+
+.cta-star:hover .star-icon {
+  fill: #fbbf24;
+  filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.5));
+  transform: scale(1.15) rotate(12deg);
+}
+
+.landing-nav-left {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.landing-back-btn.subtle {
+  background: transparent;
+  border-color: transparent;
+  color: #64748b;
+}
+
+.landing-back-btn.subtle:hover {
+  color: #94a3b8;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.landing-star-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  padding: 0.35rem 0.85rem;
+  color: #94a3b8;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.landing-star-pill:hover {
+  color: #fbbf24;
+  border-color: rgba(251, 191, 36, 0.35);
+  background: rgba(251, 191, 36, 0.08);
+  transform: translateY(-1px);
+}
+
 /* CLI Quick Install */
 .cli-box {
   display: inline-flex;
