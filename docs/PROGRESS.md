@@ -17,11 +17,30 @@ Dokumen ini memantau milestone, status implementasi fitur, dan roadmap dari **Ze
 | **Fase 4.3: Showcase Simplification & Visual Restoration** | Frame Preview macOS, Single Hero, README Alignment | ✅ **Selesai** | 2026-09-26 | Hapus double-hero, frame preview jendela, tautan resmi README |
 | **Fase 4.4: Multi-Page Platform Architecture & Explore Hub** | Dedicated `/vscode` & `/browser`, bridging `/explore` | ✅ **Selesai** | 2026-09-26 | Routing SPA terfokus, restorasi kemewahan landing page awal |
 | **Fase 4.5: Storage Persistence, Security Audit & Hook Stabilization** | Multi-Tab Storage Sync, Security Hardening, Zero-Lag Hooks | ✅ **Selesai** | 2026-09-27 | Perbaikan infinite re-render loop, `useCallback` i18n, `storage` listener |
+| **Fase 4.6: Privacy Policy, Support Hub & Notification Polish** | Dedicated `/privacy-policy` & `/support`, In-App Banner & Reminders | ✅ **Selesai** | 2026-09-27 | Standarisasi footer, rute dukungan langsung, banner izin notifikasi, dan balancing tipografi |
 | **Fase 5: Audio & Deployment** | Audio Adzan, Gentle Chime, CI/CD Hosting | ⏳ **Backlog** | Q4 2026 | Cloudflare Pages / Vercel rewrite & automated test |
 
 ---
 
 ## ✅ Rincian Milestone yang Telah Selesai
+
+### Fase 4.6: Privacy Policy, Support Hub & Notification Polish (Selesai: 2026-09-27)
+- [x] **Halaman Bantuan & Dukungan Pengguna Mandiri (`/support` & `/help`)**:
+  - Saluran kontak langsung: Laporkan Bug via GitHub Issues, Usulan Fitur & Ide via GitHub Issues, dan Email Langsung ke pengembang.
+  - Kartu dukungan komunitas (*Support Creator*) via Saweria dan Star GitHub.
+  - Takedown konten FAQ untuk menjaga halaman tetap ringkas, bersih, dan berfokus pada saluran kontak langsung.
+- [x] **Kebijakan Privasi Resmi (`/privacy-policy`)**:
+  - Halaman dedikasi dwibahasa (ID / EN) yang memenuhi standar privasi Google Chrome Web Store, Visual Studio Marketplace, dan regulasi privasi global.
+  - Penegasan 100% data tersimpan di perangkat lokal pengguna tanpa analitik pelacak.
+- [x] **Standarisasi Footer Lintas Halaman**:
+  - Format footer seragam di semua rute (`/vscode`, `/browser`, `/explore`, `/privacy-policy`, `/support`):
+    `Zen Clock Apps`
+    `Lisensi Open Source MIT • Privacy Policy • Help & Support`
+- [x] **Penyempurnaan Arsitektur Notifikasi & In-App Reminder**:
+  - Spanduk kontekstual izin notifikasi non-intrusif (`NotificationBanner.jsx`) dengan opsi "Izinkan Notifikasi" dan "Nanti Saja".
+  - Layar pengingat serena in-app (`ReminderModal.jsx`) lengkap dengan Web Audio API sintetis (gentle chime) dan `notification.onclick = () => window.focus()`.
+- [x] **Harmonisasi Tipografi & Proporsi Tampilan**:
+  - Menyeimbangkan tipografi kartu creator support di `ExplorePage.css` (`.support-title` 14.5px semi-bold, `.support-desc` 12.5px) agar proporsional dan selaras dengan estetika Zen Clock.
 
 ### Fase 4.5: Storage Persistence, Security Audit & Hook Stabilization (Selesai: 2026-09-27)
 - [x] **Eliminasi Infinite Render Loop & Stabilitas Navigasi**:

@@ -424,10 +424,10 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: 18px;
-  font-weight: 700;
+  font-size: 14.5px;
+  font-weight: 600;
   color: var(--zen-text-primary, #f8fafc);
-  margin: 0 0 6px;
+  margin: 0 0 4px;
 }
 
 .support-title svg {
@@ -436,8 +436,8 @@
 }
 
 .support-desc {
-  font-size: 13.5px;
-  line-height: 1.55;
+  font-size: 12.5px;
+  line-height: 1.5;
   color: var(--zen-text-muted, #94a3b8);
   margin: 0;
 }

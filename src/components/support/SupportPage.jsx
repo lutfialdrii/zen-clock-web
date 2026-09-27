@@ -3,73 +3,19 @@ import {
   ArrowLeft, 
   Clock, 
   HelpCircle, 
-  Bell, 
-  Compass, 
-  Timer, 
   Bug, 
   MessageSquare, 
   Mail, 
   Heart, 
   Star, 
-  ExternalLink, 
-  CheckCircle2,
-  ChevronDown
+  ExternalLink 
 } from 'lucide-react';
 import { SUPPORT_LINKS } from '../../utils/supportLinks';
 import './SupportPage.css';
 
 export default function SupportPage({ onBackToClock, onBackToExplore, onNavigate }) {
   const [lang, setLang] = useState('id'); // 'id' | 'en'
-  const [openFaq, setOpenFaq] = useState(null);
   const isEn = lang === 'en';
-
-  const toggleFaq = (index) => {
-    setOpenFaq(openFaq === index ? null : index);
-  };
-
-  const faqs = isEn ? [
-    {
-      icon: <Bell size={18} className="faq-icon" />,
-      q: "Notifications don't appear when prayer time arrives or timer ends?",
-      a: "Modern browsers require notification permission. If you accidentally clicked 'Block', click the tune/lock icon on the left of your browser address bar (URL bar), set Notifications to 'Allow', then refresh the page. On Windows or macOS, ensure 'Do Not Disturb' or 'Focus Assist' is turned off so banners can pop up."
-    },
-    {
-      icon: <Compass size={18} className="faq-icon" />,
-      q: "How does Zen Clock calculate prayer times and are they accurate?",
-      a: "Zen Clock uses official Ministry of Religious Affairs (Kemenag RI) astronomical algorithms with a standard +2-minute safety buffer (ihtiyat). For global locations outside Indonesia, it uses the Muslim World League (MWL) calculation. You can also fine-tune each prayer time by -15 to +15 minutes via the 'Adjust Schedule' (Koreksi Menit) menu."
-    },
-    {
-      icon: <Timer size={18} className="faq-icon" />,
-      q: "Does the Pomodoro timer keep running when I switch tabs or close the popup?",
-      a: "Yes! In the Browser Extension, a persistent Background Service Worker keeps ticking without draining memory. In the Web App & PWA, timers synchronize with timestamps so that when you return to the tab, your elapsed work/break time is accurate."
-    },
-    {
-      icon: <HelpCircle size={18} className="faq-icon" />,
-      q: "Is Zen Clock completely free and does it collect my personal data?",
-      a: "Zen Clock is 100% free, ad-free, and open-source under the MIT License. All calculations and settings are stored locally on your device. We collect zero personal data, zero browsing history, and use zero analytics trackers."
-    }
-  ] : [
-    {
-      icon: <Bell size={18} className="faq-icon" />,
-      q: "Notifikasi tidak muncul saat waktu sholat tiba atau Pomodoro selesai?",
-      a: "Peramban memerlukan izin notifikasi desktop. Jika sebelumnya Anda tidak sengaja memblokir, klik ikon gembok/setelan di sebelah kiri bilah URL peramban, ubah izin 'Notifikasi' menjadi 'Izinkan', lalu muat ulang halaman. Di Windows atau macOS, pastikan fitur 'Jangan Ganggu' (Do Not Disturb/Focus Assist) dalam kondisi nonaktif agar spanduk notifikasi dapat tampil."
-    },
-    {
-      icon: <Compass size={18} className="faq-icon" />,
-      q: "Bagaimana metode hisab jadwal sholat Zen Clock dan apakah akurat?",
-      a: "Zen Clock menggunakan standar hisab resmi Kementerian Agama RI (Kemenag RI) lengkap dengan pengaman waktu (+2 menit ihtiyat). Untuk wilayah di luar Indonesia, sistem menggunakan hisab Liga Muslim Dunia (MWL). Anda juga dapat melakukan kalibrasi manual -15 hingga +15 menit melalui menu 'Koreksi Menit Sholat'."
-    },
-    {
-      icon: <Timer size={18} className="faq-icon" />,
-      q: "Apakah timer Pomodoro tetap berjalan saat tab diminimalkan atau popup ditutup?",
-      a: "Ya! Pada Ekstensi Browser (Chrome & Edge), timer dijalankan oleh Background Service Worker yang persisten dan hemat baterai. Pada Web App & PWA, perhitungan timer berbasis stempel waktu (timestamp) sehingga durasi kerja dan istirahat tetap akurat saat Anda kembali ke tab."
-    },
-    {
-      icon: <HelpCircle size={18} className="faq-icon" />,
-      q: "Apakah Zen Clock gratis dan apakah data pribadi saya dikumpulkan?",
-      a: "Zen Clock 100% gratis, bebas iklan, dan bersumber terbuka di bawah Lisensi MIT. Seluruh hisab dan preferensi disimpan secara lokal di perangkat Anda. Kami tidak mengumpulkan data pribadi, tidak merekam riwayat penjelajahan, dan tidak menggunakan pelacak analitik apa pun."
-    }
-  ];
 
   return (
     <div className="support-page-root">
@@ -136,8 +82,8 @@ export default function SupportPage({ onBackToClock, onBackToExplore, onNavigate
           </h1>
           <p className="support-subtitle">
             {isEn 
-              ? "Find quick answers to common questions, troubleshoot issues, or connect directly with the developer team." 
-              : "Temukan solusi cepat untuk kendala umum, panduan penggunaan, atau hubungi pengembang secara langsung."}
+              ? "Have a question, feedback, or need help? Connect directly with the developer." 
+              : "Punya pertanyaan, masukan ide, atau butuh bantuan? Hubungi kami langsung melalui saluran di bawah."}
           </p>
         </div>
 
@@ -199,53 +145,18 @@ export default function SupportPage({ onBackToClock, onBackToExplore, onNavigate
           </a>
         </section>
 
-        {/* FAQ & Troubleshooting Section */}
-        <section className="support-faq-section">
-          <div className="section-heading">
-            <h2>{isEn ? "Frequently Asked Questions (FAQ)" : "Pertanyaan yang Sering Diajukan (FAQ)"}</h2>
-            <p>{isEn ? "Quick troubleshooting for notifications, calculations, and settings." : "Panduan ringkas seputar notifikasi, hisab jadwal, dan konfigurasi."}</p>
-          </div>
-
-          <div className="faq-list">
-            {faqs.map((faq, idx) => {
-              const isOpen = openFaq === idx;
-              return (
-                <div key={idx} className={`faq-item ${isOpen ? 'open' : ''}`}>
-                  <button 
-                    type="button" 
-                    className="faq-question-btn" 
-                    onClick={() => toggleFaq(idx)}
-                    aria-expanded={isOpen}
-                  >
-                    <div className="faq-q-left">
-                      {faq.icon}
-                      <span className="faq-q-text">{faq.q}</span>
-                    </div>
-                    <ChevronDown size={18} className={`faq-chevron ${isOpen ? 'rotate' : ''}`} />
-                  </button>
-                  {isOpen && (
-                    <div className="faq-answer-wrap">
-                      <p className="faq-answer-text">{faq.a}</p>
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </section>
-
         {/* Community & Creator Support */}
         <section className="support-community-card">
           <div className="community-content">
             <div className="community-badge">
               <Heart size={14} className="heart-icon" />
-              <span>{isEn ? "Support the Developer" : "Dukung Pengembang"}</span>
+              <span>Support Creator</span>
             </div>
-            <h3>{isEn ? "Help Zen Clock stay free and ad-free" : "Bantu Zen Clock tetap gratis & bebas iklan"}</h3>
+            <h3>{isEn ? "Help Zen Clock keep develop" : "Bantu Zen Clock terus update"}</h3>
             <p>
               {isEn 
-                ? "Zen Clock is an independent, open-source project. If you find it helpful for your productivity and prayer routine, consider buying a coffee or giving a GitHub star."
-                : "Zen Clock adalah proyek independen dan open-source. Jika aplikasi ini membantu fokus kerja dan ibadah Anda, traktiran kopi atau bintang di GitHub sangat berarti bagi kami."}
+                ? "If you find it helpful for your productivity, consider buying a coffee or giving a GitHub star."
+                : "Jika aplikasi ini membantu fokus Anda, traktiran kopi atau bintang di GitHub sangat berarti bagi kami."}
             </p>
           </div>
 
