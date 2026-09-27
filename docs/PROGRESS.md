@@ -40,7 +40,7 @@ Dokumen ini memantau milestone, status implementasi fitur, dan roadmap dari **Ze
   - Spanduk kontekstual izin notifikasi non-intrusif (`NotificationBanner.jsx`) dengan opsi "Izinkan Notifikasi" dan "Nanti Saja".
   - Layar pengingat serena in-app (`ReminderModal.jsx`) lengkap dengan Web Audio API sintetis (gentle chime) dan `notification.onclick = () => window.focus()`.
 - [x] **Harmonisasi Tipografi & Proporsi Tampilan**:
-  - Menyeimbangkan tipografi kartu creator support di `ExplorePage.css` (`.support-title` 14.5px semi-bold, `.support-desc` 12.5px) agar proporsional dan selaras dengan estetika Zen Clock.
+  - Menyeimbangkan tipografi kartu creator support di `ExplorePage.css` (`.support-title` 12px semi-bold, `.support-desc` 11.5px) agar ramping, proporsional, dan selaras dengan estetika Zen Clock.
 
 ### Fase 4.5: Storage Persistence, Security Audit & Hook Stabilization (Selesai: 2026-09-27)
 - [x] **Eliminasi Infinite Render Loop & Stabilitas Navigasi**:
