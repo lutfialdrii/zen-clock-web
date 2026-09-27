@@ -12,12 +12,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 
 ### 🇮🇩 Bahasa Indonesia
 
 #### ✨ Arsitektur Multi-Page & Dedicated Landing Pages
+- **Halaman Kebijakan Privasi (`/privacy`)**:
+  - Halaman transparansi data dwibahasa (ID/EN) resmi untuk memenuhi syarat wajib publikasi Chrome Web Store Developer Program Policies. Menegaskan arsitektur 100% offline-first, penyimpanan preferensi lokal, dan nol pengumpulan data pribadi (*Zero Data Collection*).
 - **Dedicated Landing Page VS Code (`/vscode` & `/extension`)**:
   - Restorasi landing page premium mandiri dengan Hero showcase, frame preview jendela macOS editor, 6 fitur unggulan, dan integrasi tombol 1-klik / terminal CLI.
 - **Dedicated Landing Page Browser Extension (`/browser`)**:
   - Halaman khusus untuk Chrome & Edge: Hero, frame preview jendela macOS (`preview-extension.png`), 3 pilar fitur browser, akordeon panduan instalasi manual (Developer Mode), dan rilis unduhan ZIP.
 - **Bridging Hub Ekosistem (`/explore` & `/apps`)**:
   - Halaman etalase terpadu dengan kartu produk multi-platform, tombol navigasi cepat, section apresiasi Saweria, dan GitHub star badges.
+- **Pembaruan Pratinjau README**:
+  - Menyelaraskan banner tangkapan layar utama pada `README.md` dan `README.id.md` ke `preview-extension-browser.png`.
 - **Zero-Dependency SPA Routing**:
   - Dukungan native HTML5 History API (`pushState`/`popstate`) dengan penanganan fallback static routing via `public/_redirects` dan `vercel.json`.
 

@@ -229,7 +229,17 @@ export default function ExplorePage({ onBackToClock, onNavigate }) {
       {/* Footer */}
       <footer className="explore-footer">
         <p>{t.footer?.copyright || 'Zen Clock © 2026. Dibuat dengan penuh dedikasi.'}</p>
-        <p className="footer-sub">{t.footer?.mit || 'Open Source di bawah Lisensi MIT.'}</p>
+        <p className="footer-sub">
+          {t.footer?.mit || 'Open Source di bawah Lisensi MIT.'} •{' '}
+          <button 
+            type="button" 
+            onClick={() => onNavigate('privacy')} 
+            className="footer-privacy-btn"
+            style={{ background: 'none', border: 'none', color: 'inherit', textDecoration: 'underline', cursor: 'pointer', font: 'inherit', padding: 0 }}
+          >
+            Privacy Policy
+          </button>
+        </p>
       </footer>
     </div>
   );

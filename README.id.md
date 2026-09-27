@@ -1,7 +1,7 @@
 # ⏰ Zen Clock: Pomodoro & Jadwal Sholat (Web & PWA)
 
 <p align="center">
-  <img src="./public/assets/preview-web.png" alt="Zen Clock Preview" width="100%" />
+  <img src="./public/assets/preview-extension-browser.png" alt="Zen Clock Preview" width="100%" />
 </p>
 
 <p align="center">

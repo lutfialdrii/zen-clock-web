@@ -19,7 +19,7 @@ const CHROME_STORE_URL = 'https://github.com/lutfialdrii/zen-clock-extension-bro
 const ZIP_RELEASE_URL = 'https://github.com/lutfialdrii/zen-clock-extension-browser/releases/latest';
 const GITHUB_REPO_URL = 'https://github.com/lutfialdrii/zen-clock-extension-browser';
 
-export default function BrowserLanding({ onBackToClock, onBackToExplore }) {
+export default function BrowserLanding({ onBackToClock, onBackToExplore, onNavigate }) {
   const { lang, setLang } = useLanguage();
   const [isManualOpen, setIsManualOpen] = useState(false);
 
@@ -293,7 +293,16 @@ export default function BrowserLanding({ onBackToClock, onBackToExplore }) {
       {/* Footer */}
       <footer className="browser-footer">
         <p>{isEn ? "Zen Clock © 2026. Crafted with care." : "Zen Clock © 2026. Dibuat dengan penuh dedikasi."}</p>
-        <p className="footer-sub">{isEn ? "Open Source under MIT License." : "Open Source di bawah Lisensi MIT."}</p>
+        <p className="footer-sub">
+          {isEn ? "Open Source under MIT License." : "Open Source di bawah Lisensi MIT."} •{' '}
+          <button 
+            type="button" 
+            onClick={() => onNavigate ? onNavigate('privacy') : (window.location.href = '/privacy')} 
+            style={{ background: 'none', border: 'none', color: 'inherit', textDecoration: 'underline', cursor: 'pointer', font: 'inherit', padding: 0 }}
+          >
+            {isEn ? "Privacy Policy" : "Kebijakan Privasi"}
+          </button>
+        </p>
       </footer>
     </div>
   );

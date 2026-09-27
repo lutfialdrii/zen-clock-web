@@ -8,6 +8,7 @@ import SettingsModal from './components/SettingsModal';
 import ExplorePage from './components/explore/ExplorePage';
 import ExtensionLanding from './components/ExtensionLanding';
 import BrowserLanding from './components/browser/BrowserLanding';
+import PrivacyPage from './components/privacy/PrivacyPage';
 import { Timer, Clock, Download, Settings as SettingsIcon, Maximize, Minimize, Star } from 'lucide-react';
 import { useLanguage, getTranslations } from './utils/i18n';
 import {
@@ -52,6 +53,11 @@ const resolveCurrentRoute = () => {
     hash.includes('apps')
   ) {
     return { route: 'explore' };
+  }
+
+  // 4. Privacy Policy page
+  if (path.startsWith('/privacy') || hash.includes('privacy')) {
+    return { route: 'privacy' };
   }
 
   return { route: 'app' };
@@ -303,6 +309,16 @@ function App() {
   if (currentRoute === 'browser') {
     return (
       <BrowserLanding
+        onBackToClock={() => navigateTo('app')}
+        onBackToExplore={() => navigateTo('explore')}
+        onNavigate={(dest) => navigateTo(dest)}
+      />
+    );
+  }
+
+  if (currentRoute === 'privacy') {
+    return (
+      <PrivacyPage
         onBackToClock={() => navigateTo('app')}
         onBackToExplore={() => navigateTo('explore')}
       />
