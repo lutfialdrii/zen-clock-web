@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 import './PrivacyPage.css';
 
-export default function PrivacyPage({ onBackToClock, onBackToExplore }) {
+export default function PrivacyPage({ onBackToClock, onBackToExplore, onNavigate }) {
   const [lang, setLang] = useState('id'); // 'id' | 'en'
   const isEn = lang === 'en';
 
@@ -221,23 +221,31 @@ export default function PrivacyPage({ onBackToClock, onBackToExplore }) {
                 <span>GitHub: lutfialdrii/zen-clock-web</span>
                 <ExternalLink size={12} />
               </a>
-              <a 
-                href="https://github.com/lutfialdrii/zen-clock-extension-browser" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="contact-pill"
-              >
-                <Globe size={14} />
-                <span>GitHub: lutfialdrii/zen-clock-extension-browser</span>
-                <ExternalLink size={12} />
-              </a>
             </div>
           </section>
         </article>
 
         {/* Footer */}
         <footer className="privacy-footer">
-          <p>© 2026 Zen Clock Apps</p>
+          <p>Zen Clock Apps</p>
+          <p className="footer-sub" style={{ margin: '6px 0 0 0', fontSize: '12px', color: 'rgba(255, 255, 255, 0.45)' }}>
+            {isEn ? "MIT Open Source License" : "Lisensi Open Source MIT"} •{' '}
+            <button 
+              type="button" 
+              onClick={() => onNavigate ? onNavigate('privacy-policy') : (window.location.href = '/privacy-policy')} 
+              style={{ background: 'none', border: 'none', color: 'inherit', textDecoration: 'underline', cursor: 'pointer', font: 'inherit', padding: 0 }}
+            >
+              Privacy Policy
+            </button>
+            {' '}•{' '}
+            <button 
+              type="button" 
+              onClick={() => onNavigate ? onNavigate('support') : (window.location.href = '/support')} 
+              style={{ background: 'none', border: 'none', color: 'inherit', textDecoration: 'underline', cursor: 'pointer', font: 'inherit', padding: 0 }}
+            >
+              Help & Support
+            </button>
+          </p>
         </footer>
       </main>
     </div>

@@ -24,7 +24,7 @@ const VSCODE_DEEP_LINK = 'vscode:extension/lutfialdrii.extension-clock';
 const GITHUB_REPO_URL = 'https://github.com/lutfialdrii/zen-clock';
 const CLI_COMMAND = 'code --install-extension lutfialdrii.extension-clock';
 
-export default function ExtensionLanding({ onBackToClock, onBackToExplore }) {
+export default function ExtensionLanding({ onBackToClock, onBackToExplore, onNavigate }) {
   const { lang, setLang } = useLanguage();
   const [copied, setCopied] = useState(false);
 
@@ -408,21 +408,24 @@ export default function ExtensionLanding({ onBackToClock, onBackToExplore }) {
 
       {/* Footer */}
       <footer className="landing-footer">
-        <div className="footer-links">
-          <a href={MARKETPLACE_URL} target="_blank" rel="noopener noreferrer">
-            Visual Studio Marketplace
-          </a>
-          <span>•</span>
-          <a href={GITHUB_REPO_URL} target="_blank" rel="noopener noreferrer">
-            GitHub Repository
-          </a>
-          <span>•</span>
-          <button onClick={onBackToClock} className="footer-text-btn">
-            Zen Clock Web App
+        <p>Zen Clock Apps</p>
+        <p className="footer-sub" style={{ margin: '6px 0 0 0', fontSize: '12px', color: 'rgba(255, 255, 255, 0.45)' }}>
+          {isEn ? "MIT Open Source License" : "Lisensi Open Source MIT"} •{' '}
+          <button 
+            type="button" 
+            onClick={() => onNavigate ? onNavigate('privacy-policy') : (window.location.href = '/privacy-policy')} 
+            style={{ background: 'none', border: 'none', color: 'inherit', textDecoration: 'underline', cursor: 'pointer', font: 'inherit', padding: 0 }}
+          >
+            Privacy Policy
           </button>
-        </div>
-        <p className="footer-copy">
-          MIT Licensed • Crafted with care by <a href="https://github.com/lutfialdrii" target="_blank" rel="noopener noreferrer">lutfialdrii</a>
+          {' '}•{' '}
+          <button 
+            type="button" 
+            onClick={() => onNavigate ? onNavigate('support') : (window.location.href = '/support')} 
+            style={{ background: 'none', border: 'none', color: 'inherit', textDecoration: 'underline', cursor: 'pointer', font: 'inherit', padding: 0 }}
+          >
+            Help & Support
+          </button>
         </p>
       </footer>
     </div>

@@ -292,15 +292,15 @@ export default function BrowserLanding({ onBackToClock, onBackToExplore, onNavig
 
       {/* Footer */}
       <footer className="browser-footer">
-        <p>{isEn ? "Zen Clock © 2026. Crafted with care." : "Zen Clock © 2026. Dibuat dengan penuh dedikasi."}</p>
+        <p>Zen Clock Apps</p>
         <p className="footer-sub">
-          {isEn ? "Open Source under MIT License." : "Open Source di bawah Lisensi MIT."} •{' '}
+          {isEn ? "MIT Open Source License" : "Lisensi Open Source MIT"} •{' '}
           <button 
             type="button" 
             onClick={() => onNavigate ? onNavigate('privacy-policy') : (window.location.href = '/privacy-policy')} 
             style={{ background: 'none', border: 'none', color: 'inherit', textDecoration: 'underline', cursor: 'pointer', font: 'inherit', padding: 0 }}
           >
-            {isEn ? "Privacy Policy" : "Kebijakan Privasi"}
+            Privacy Policy
           </button>
           {' '}•{' '}
           <button 
@@ -308,7 +308,7 @@ export default function BrowserLanding({ onBackToClock, onBackToExplore, onNavig
             onClick={() => onNavigate ? onNavigate('support') : (window.location.href = '/support')} 
             style={{ background: 'none', border: 'none', color: 'inherit', textDecoration: 'underline', cursor: 'pointer', font: 'inherit', padding: 0 }}
           >
-            {isEn ? "Help & Support" : "Bantuan & Dukungan"}
+            Help & Support
           </button>
         </p>
       </footer>

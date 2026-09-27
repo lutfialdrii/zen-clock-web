@@ -344,6 +344,7 @@ function App() {
       <ExtensionLanding
         onBackToClock={() => navigateTo('app')}
         onBackToExplore={() => navigateTo('explore')}
+        onNavigate={(dest) => navigateTo(dest)}
       />
     );
   }
@@ -363,6 +364,7 @@ function App() {
       <PrivacyPage
         onBackToClock={() => navigateTo('app')}
         onBackToExplore={() => navigateTo('explore')}
+        onNavigate={(dest) => navigateTo(dest)}
       />
     );
   }
@@ -385,6 +387,7 @@ function App() {
       <SupportPage
         onBackToClock={() => navigateTo('app')}
         onBackToExplore={() => navigateTo('explore')}
+        onNavigate={(dest) => navigateTo(dest)}
       />
     );
   }
