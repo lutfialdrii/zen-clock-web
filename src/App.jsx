@@ -55,9 +55,13 @@ const resolveCurrentRoute = () => {
     return { route: 'explore' };
   }
 
-  // 4. Privacy Policy page
-  if (path.startsWith('/privacy') || hash.includes('privacy')) {
-    return { route: 'privacy' };
+  // 4. Privacy Policy page (/privacy-policy, /privacy, or #privacy)
+  if (
+    path.startsWith('/privacy-policy') ||
+    path.startsWith('/privacy') || 
+    hash.includes('privacy')
+  ) {
+    return { route: 'privacy-policy' };
   }
 
   return { route: 'app' };
@@ -246,10 +250,11 @@ function App() {
   };
 
   const navigateTo = (route) => {
-    setNavState({ currentRoute: route });
+    const targetRoute = route === 'privacy' ? 'privacy-policy' : route;
+    setNavState({ currentRoute: targetRoute });
     if (typeof window !== 'undefined' && window.history?.pushState) {
-      const url = route === 'app' ? '/' : `/${route}`;
-      window.history.pushState({ route }, '', url);
+      const url = targetRoute === 'app' ? '/' : `/${targetRoute}`;
+      window.history.pushState({ route: targetRoute }, '', url);
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -316,7 +321,7 @@ function App() {
     );
   }
 
-  if (currentRoute === 'privacy') {
+  if (currentRoute === 'privacy-policy' || currentRoute === 'privacy') {
     return (
       <PrivacyPage
         onBackToClock={() => navigateTo('app')}

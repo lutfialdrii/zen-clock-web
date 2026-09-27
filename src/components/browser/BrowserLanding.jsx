@@ -297,7 +297,7 @@ export default function BrowserLanding({ onBackToClock, onBackToExplore, onNavig
           {isEn ? "Open Source under MIT License." : "Open Source di bawah Lisensi MIT."} •{' '}
           <button 
             type="button" 
-            onClick={() => onNavigate ? onNavigate('privacy') : (window.location.href = '/privacy')} 
+            onClick={() => onNavigate ? onNavigate('privacy-policy') : (window.location.href = '/privacy-policy')} 
             style={{ background: 'none', border: 'none', color: 'inherit', textDecoration: 'underline', cursor: 'pointer', font: 'inherit', padding: 0 }}
           >
             {isEn ? "Privacy Policy" : "Kebijakan Privasi"}

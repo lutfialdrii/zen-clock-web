@@ -233,7 +233,7 @@ export default function ExplorePage({ onBackToClock, onNavigate }) {
           {t.footer?.mit || 'Open Source di bawah Lisensi MIT.'} •{' '}
           <button 
             type="button" 
-            onClick={() => onNavigate('privacy')} 
+            onClick={() => onNavigate('privacy-policy')} 
             className="footer-privacy-btn"
             style={{ background: 'none', border: 'none', color: 'inherit', textDecoration: 'underline', cursor: 'pointer', font: 'inherit', padding: 0 }}
           >

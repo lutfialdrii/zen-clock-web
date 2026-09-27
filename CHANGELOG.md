@@ -12,8 +12,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 
 ### 🇮🇩 Bahasa Indonesia
 
 #### ✨ Arsitektur Multi-Page & Dedicated Landing Pages
-- **Halaman Kebijakan Privasi (`/privacy`)**:
-  - Halaman transparansi data dwibahasa (ID/EN) resmi untuk memenuhi syarat wajib publikasi Chrome Web Store Developer Program Policies. Menegaskan arsitektur 100% offline-first, penyimpanan preferensi lokal, dan nol pengumpulan data pribadi (*Zero Data Collection*).
+- **Halaman Kebijakan Privasi (`/privacy-policy`)**:
+  - Halaman transparansi data dwibahasa (ID/EN) resmi untuk memenuhi syarat wajib publikasi Chrome Web Store Developer Program Policies (mendukung rute `/privacy-policy` dan alias ramah `/privacy`). Menegaskan arsitektur 100% offline-first, penyimpanan preferensi lokal, dan nol pengumpulan data pribadi (*Zero Data Collection*).
 - **Dedicated Landing Page VS Code (`/vscode` & `/extension`)**:
   - Restorasi landing page premium mandiri dengan Hero showcase, frame preview jendela macOS editor, 6 fitur unggulan, dan integrasi tombol 1-klik / terminal CLI.
 - **Dedicated Landing Page Browser Extension (`/browser`)**:
@@ -46,6 +46,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 
 ### 🇬🇧 English
 
 #### ✨ Multi-Page Platform Architecture & Dedicated Landings
+- **Privacy Policy Page (`/privacy-policy` & `/privacy`)**:
+  - Bilingual data transparency page compliant with Chrome Web Store Developer Policies, disclosing 100% offline-first calculations, local client-side storage, and zero data collection.
 - **Dedicated VS Code Landing Page (`/vscode` & `/extension`)**:
   - Full-featured landing page with hero frame, macOS window mockup, 6 core feature cards, screenshot gallery, and 1-click install deep links.
 - **Dedicated Browser Extension Landing Page (`/browser`)**:
