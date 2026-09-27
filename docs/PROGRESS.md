@@ -14,11 +14,47 @@ Dokumen ini memantau milestone, status implementasi fitur, dan roadmap dari **Ze
 | **Fase 4: Web Clock Feature Parity** | Paritas Kustomisasi & Modals dengan Extension | ✅ **Selesai** | 2026-09-26 | SettingsModal, CityPicker (539+ kota), AdjustModal, Theme |
 | **Fase 4.1: Product Reordering & Copy Refinement** | Browser #1, "Zen Clock Apps", Narasi Luwes | ✅ **Selesai** | 2026-09-26 | Browser Extension default, gaya bahasa ramah & natural |
 | **Fase 4.2: Official Title & Release Statuses** | "Zen Clock: Pomodoro & Muslim Prayer Times", Status Badges | ✅ **Selesai** | 2026-09-26 | Hero "Muslim Utilities", pola judul tab, status rilis presisi |
+| **Fase 4.3: Showcase Simplification & Visual Restoration** | Frame Preview macOS, Single Hero, README Alignment | ✅ **Selesai** | 2026-09-26 | Hapus double-hero, frame preview jendela, tautan resmi README |
+| **Fase 4.4: Multi-Page Platform Architecture & Explore Hub** | Dedicated `/vscode` & `/browser`, bridging `/explore` | ✅ **Selesai** | 2026-09-26 | Routing SPA terfokus, restorasi kemewahan landing page awal |
+| **Fase 4.5: Storage Persistence, Security Audit & Hook Stabilization** | Multi-Tab Storage Sync, Security Hardening, Zero-Lag Hooks | ✅ **Selesai** | 2026-09-27 | Perbaikan infinite re-render loop, `useCallback` i18n, `storage` listener |
 | **Fase 5: Audio & Deployment** | Audio Adzan, Gentle Chime, CI/CD Hosting | ⏳ **Backlog** | Q4 2026 | Cloudflare Pages / Vercel rewrite & automated test |
 
 ---
 
 ## ✅ Rincian Milestone yang Telah Selesai
+
+### Fase 4.5: Storage Persistence, Security Audit & Hook Stabilization (Selesai: 2026-09-27)
+- [x] **Eliminasi Infinite Render Loop & Stabilitas Navigasi**:
+  - Mengisolasi dependensi bahasa pada hook `useLanguage` menggunakan `useCallback` dan `useMemo` sehingga referensi fungsi tidak berubah setiap render.
+  - Memanfaatkan `useRef` di `App.jsx` untuk menjaga inisialisasi state hanya berjalan 1 kali saat mount, menghentikan loop re-render tak berujung yang sebelumnya membuat browser lag dan crash.
+- [x] **Sinkronisasi Multi-Tab Real-time**:
+  - Menambahkan listener event native `window.addEventListener('storage', ...)` untuk sinkronisasi seketika saat kota, warna aksen, atau jadwal sholat diubah di tab lain.
+- [x] **Audit Keamanan & Ketahanan Error Storage**:
+  - Membungkus akses storage `getLastRemindedPrayer` dan `setLastRemindedPrayer` dengan `try...catch` agar tahan pada mode penyamaran ketat (strict private browsing).
+  - Sanitasi validasi format HEX warna aksen sebelum diset ke CSS variable `--zen-accent`.
+
+### Fase 4.4: Multi-Page Platform Architecture & Explore Hub (Selesai: 2026-09-26)
+- [x] **Bridging Hub Page (`/explore`)**:
+  - Halaman perantara anggun yang memperkenalkan ekosistem Zen Clock dan mengarahkan pengguna ke platform tujuannya (Web Clock, VS Code, Browser, CLI, Mobile).
+  - Dilengkapi banner apresiasi Saweria dan Star GitHub.
+- [x] **Restorasi Dedicated Landing Page VS Code (`/vscode` & `/extension`)**:
+  - Mengembalikan struktur landing page awal yang mewah dan terfokus: Hero luas, frame preview jendela macOS, 6 fitur lengkap dari README, galeri tangkapan layar antarmuka editor, dan tombol instalasi 1-klik / CLI.
+- [x] **Dedicated Landing Page Browser Extension (`/browser`)**:
+  - Halaman terpisah khusus untuk Chrome & Edge: Hero, frame preview jendela macOS (`preview-extension.png`), 3 pilar fitur browser, accordion instalasi manual (Developer Mode), dan tautan rilis ZIP.
+- [x] **Sinkronisasi Routing SPA & History API**:
+  - Dukungan navigasi mulus menggunakan HTML5 History API (`pushState`) dan fallback hash (`/#explore`, `/#vscode`, `/#browser`) untuk static hosting.
+  - Dukungan navigasi dua arah (breadcrumb kembali ke `/explore` dan buka `Web Clock`).
+
+### Fase 4.3: Showcase Simplification & Visual Restoration (Selesai: 2026-09-26)
+- [x] **Eliminasi Double Hero & Redundansi Headline**:
+  - Menghapus hero statis berulang dari `AppsShowcase.jsx` sehingga alur halaman langsung fokus pada tab platform yang aktif tanpa teks yang bertumpang tindih.
+- [x] **Restorasi Frame Preview Antarmuka macOS**:
+  - Menghadirkan kembali bingkai jendela macOS (`.showcase-preview-frame` dengan titik merah, kuning, hijau) pada tab VS Code dan Browser Extension.
+  - Memanfaatkan aset tangkapan layar antarmuka nyata (`preview-fullview.png` dan `preview-extension.png`).
+- [x] **README sebagai Single Source of Truth**:
+  - Menyederhanakan kartu fitur di web menjadi 3 pilar utama dan menyematkan tautan resmi langsung ke dokumentasi GitHub README masing-masing repo.
+- [x] **Tombol Apresiasi "Star di GitHub"**:
+  - Tombol aksi `.cta-btn.github-star` dengan ikon bintang interaktif beranimasi pendar emas pada tab VS Code dan Browser.
 
 ### Fase 4.2: Official Title, Tab Titles Pattern & Accurate Release Statuses (Selesai: 2026-09-26)
 - [x] **Hero Section Resmi & Browser Metadata**:
