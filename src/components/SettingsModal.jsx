@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Settings, X, Check, Palette, Globe, Bell, Clock, Compass, MapPin, Sliders, ChevronRight, Heart, Coffee, Star, ExternalLink, Layers, Sparkles } from 'lucide-react';
 import { getTranslations } from '../utils/i18n.js';
 import { SUPPORT_LINKS } from '../utils/supportLinks.js';
+import { playAudioChime } from '../utils/notification.js';
 import './Modals.css';
 
 function formatTzBadge(timezone) {
@@ -30,6 +31,7 @@ export default function SettingsModal({
   onOpenCityPicker,
   onOpenAdjustModal,
   onOpenEcosystem,
+  onTriggerTestReminder,
 }) {
   const language = settings?.language || 'id';
   const t = getTranslations(language);
@@ -49,7 +51,46 @@ export default function SettingsModal({
 
   if (!isOpen) return null;
 
+  const handleToggleNotifyPrayer = async (e) => {
+    const checked = e.target.checked;
+    if (checked && typeof Notification !== 'undefined' && Notification.permission === 'default') {
+      try {
+        const perm = await Notification.requestPermission();
+        if (perm === 'granted') {
+          playAudioChime();
+        }
+      } catch (err) {
+        console.error('Notification permission error:', err);
+      }
+    }
+    setLocalSettings((prev) => ({ ...prev, notifyPrayer: checked }));
+  };
+
+  const handleToggleNotifyPomodoro = async (e) => {
+    const checked = e.target.checked;
+    if (checked && typeof Notification !== 'undefined' && Notification.permission === 'default') {
+      try {
+        const perm = await Notification.requestPermission();
+        if (perm === 'granted') {
+          playAudioChime();
+        }
+      } catch (err) {
+        console.error('Notification permission error:', err);
+      }
+    }
+    setLocalSettings((prev) => ({ ...prev, notifyPomodoro: checked }));
+  };
+
   const handleTestPrayerAlert = () => {
+    playAudioChime();
+
+    if (onTriggerTestReminder) {
+      onTriggerTestReminder({
+        name: language === 'en' ? 'Dhuhr' : 'Dzuhur',
+        key: 'dhuhr'
+      });
+    }
+
     if (typeof window !== 'undefined' && window.chrome?.runtime?.sendMessage) {
       window.chrome.runtime.sendMessage({ type: 'TEST_PRAYER_ALERT', prayerKey: 'dhuhr' }, () => {
         setTestStatus(language === 'en' ? 'Alert Sent!' : 'Pengingat Terkirim!');
@@ -58,21 +99,35 @@ export default function SettingsModal({
       return;
     }
 
-    if (typeof Notification !== 'undefined') {
-      if (Notification.permission === 'granted') {
-        new Notification('Zen Clock', {
+    const showNotif = () => {
+      try {
+        const notif = new Notification('Zen Clock', {
           body: language === 'en' ? '🕌 Prayer Time for Dhuhr has arrived!' : '🕌 Waktu Sholat Dzuhur telah tiba!',
           icon: '/favicon.svg',
         });
+        notif.onclick = () => {
+          window.focus();
+          if (onTriggerTestReminder) {
+            onTriggerTestReminder({
+              name: language === 'en' ? 'Dhuhr' : 'Dzuhur',
+              key: 'dhuhr'
+            });
+          }
+        };
+      } catch (e) {
+        console.error('Notification error:', e);
+      }
+    };
+
+    if (typeof Notification !== 'undefined') {
+      if (Notification.permission === 'granted') {
+        showNotif();
         setTestStatus(language === 'en' ? 'Alert Sent!' : 'Pengingat Terkirim!');
         setTimeout(() => setTestStatus(''), 3000);
       } else if (Notification.permission !== 'denied') {
         Notification.requestPermission().then((perm) => {
           if (perm === 'granted') {
-            new Notification('Zen Clock', {
-              body: language === 'en' ? '🕌 Prayer Time for Dhuhr has arrived!' : '🕌 Waktu Sholat Dzuhur telah tiba!',
-              icon: '/favicon.svg',
-            });
+            showNotif();
             setTestStatus(language === 'en' ? 'Alert Sent!' : 'Pengingat Terkirim!');
             setTimeout(() => setTestStatus(''), 3000);
           }
@@ -268,12 +323,12 @@ export default function SettingsModal({
             <div className="setting-toggle-row">
               <div className="toggle-info">
                 <span className="toggle-title">
-                  {language === 'en' ? 'Auto-Open Reminder Tab' : 'Buka Otomatis Tab Pengingat'}
+                  {language === 'en' ? 'Serene Prayer Reminder Screen' : 'Layar Pengingat Sholat Khusyuk'}
                 </span>
                 <span className="toggle-desc">
                   {language === 'en'
-                    ? 'Automatically opens a serene reminder tab upon prayer arrival.'
-                    : 'Membuka tab hening baru secara otomatis saat waktu adzan tiba.'}
+                    ? 'Display a serene reminder overlay with Quranic verse upon prayer arrival.'
+                    : 'Tampilkan layar pengingat hening dengan ayat Al-Qur\'an saat waktu adzan tiba.'}
                 </span>
               </div>
               <label className="switch">
@@ -303,9 +358,7 @@ export default function SettingsModal({
                 <input
                   type="checkbox"
                   checked={localSettings.notifyPrayer}
-                  onChange={(e) =>
-                    setLocalSettings((prev) => ({ ...prev, notifyPrayer: e.target.checked }))
-                  }
+                  onChange={handleToggleNotifyPrayer}
                 />
                 <span className="slider"></span>
               </label>
@@ -318,12 +371,12 @@ export default function SettingsModal({
                 onClick={handleTestPrayerAlert}
               >
                 <Bell size={13} />
-                <span>{testStatus || (language === 'en' ? 'Test Prayer Alert & Tab' : 'Uji Notifikasi & Tab Pengingat')}</span>
+                <span>{testStatus || (language === 'en' ? 'Test Prayer Alert & Screen' : 'Uji Notifikasi & Layar Pengingat')}</span>
               </button>
               <span className="test-alert-hint">
                 {language === 'en'
-                  ? 'Triggers a simulated alert to test tab opening & system notifications.'
-                  : 'Memicu pengingat uji coba untuk memastikan pembukaan tab dan notifikasi OS berfungsi.'}
+                  ? 'Triggers a simulated alert to test prayer reminder screen & notifications.'
+                  : 'Memicu pengingat uji coba untuk memastikan layar pengingat dan notifikasi OS berfungsi.'}
               </span>
             </div>
           </div>
@@ -350,9 +403,7 @@ export default function SettingsModal({
                 <input
                   type="checkbox"
                   checked={localSettings.notifyPomodoro}
-                  onChange={(e) =>
-                    setLocalSettings((prev) => ({ ...prev, notifyPomodoro: e.target.checked }))
-                  }
+                  onChange={handleToggleNotifyPomodoro}
                 />
                 <span className="slider"></span>
               </label>

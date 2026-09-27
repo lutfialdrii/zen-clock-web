@@ -1,0 +1,224 @@
+.reminder-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: radial-gradient(circle at 50% 30%, rgba(251, 191, 36, 0.08) 0%, rgba(12, 13, 16, 0.94) 80%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.reminder-card {
+  position: relative;
+  max-width: 540px;
+  width: 100%;
+  background-color: #14161e;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 34px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(251, 191, 36, 0.06);
+}
+
+.animate-reminder {
+  animation: modalScaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes modalScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.reminder-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.reminder-close-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.reminder-icon-ring {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background-color: rgba(251, 191, 36, 0.12);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.reminder-compass {
+  color: var(--zen-accent, #fbbf24);
+}
+
+.reminder-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 12px;
+  letter-spacing: 0.05em;
+}
+
+.reminder-badge .bullet {
+  color: var(--zen-accent, #fbbf24);
+}
+
+.reminder-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 18px 0;
+  letter-spacing: -0.01em;
+}
+
+/* Quran Verse Card */
+.quran-quote-card {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.025);
+  border-left: 3px solid var(--zen-accent, #fbbf24);
+  border-radius: 0 12px 12px 0;
+  padding: 18px 20px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+}
+
+.arabic-verse {
+  font-family: 'Amiri', 'Scheherazade', 'Traditional Arabic', serif;
+  font-size: 21px;
+  line-height: 1.8;
+  color: var(--zen-accent, #fbbf24);
+  text-align: right;
+  letter-spacing: 0.02em;
+}
+
+.quran-translation {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+  font-style: italic;
+}
+
+.quran-reference {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
+  font-weight: 500;
+}
+
+/* Actions */
+.reminder-actions {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  justify-content: center;
+}
+
+.reminder-btn-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: var(--zen-accent, #fbbf24);
+  color: #14161d;
+  font-weight: 600;
+  font-size: 13.5px;
+  padding: 11px 22px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(251, 191, 36, 0.35);
+  transition: all 0.2s ease;
+}
+
+.reminder-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(251, 191, 36, 0.5);
+}
+
+.reminder-btn-secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 13.5px;
+  padding: 11px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.reminder-btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.reminder-disclaimer {
+  margin-top: 18px;
+  margin-bottom: 0;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.35);
+  line-height: 1.4;
+}
+
+@media (max-width: 480px) {
+  .reminder-card {
+    padding: 24px 18px;
+  }
+
+  .reminder-title {
+    font-size: 20px;
+  }
+
+  .arabic-verse {
+    font-size: 18px;
+  }
+
+  .reminder-actions {
+    flex-direction: column;
+  }
+
+  .reminder-btn-primary,
+  .reminder-btn-secondary {
+    width: 100%;
+  }
+}

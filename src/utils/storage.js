@@ -3,6 +3,8 @@
  * Provides persistent configuration, city selection, prayer adjustments, and Pomodoro state
  */
 
+import { playAudioChime } from './notification.js';
+
 export const DEFAULT_SETTINGS = {
   language: 'id',
   accentColor: '#fbbf24', // Warm Amber (Classic Zen Clock default)
@@ -263,6 +265,9 @@ export async function completePomodoroSession() {
     targetEndTime: null,
   });
 
+  // Play gentle completion chime
+  playAudioChime();
+
   if (typeof Notification !== 'undefined' && Notification.permission === 'granted' && settings.notifyPomodoro !== false) {
     const isEn = settings.language === 'en';
     const title = wasWork 
@@ -271,7 +276,14 @@ export async function completePomodoroSession() {
     const body = wasWork
       ? (isEn ? 'Take a short break and relax your eyes.' : 'Ambil istirahat sejenak untuk meregangkan badan dan mata.')
       : (isEn ? 'Ready to focus on your next task?' : 'Siap untuk kembali fokus bekerja?');
-    new Notification(title, { body, icon: '/favicon.svg' });
+    try {
+      const notif = new Notification(title, { body, icon: '/favicon.svg' });
+      notif.onclick = () => {
+        window.focus();
+      };
+    } catch (e) {
+      console.error('Pomodoro notification error:', e);
+    }
   }
 
   return updated;

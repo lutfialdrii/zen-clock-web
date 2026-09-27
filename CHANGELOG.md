@@ -36,6 +36,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 
   - Membungkus akses storage `getLastRemindedPrayer` dan `setLastRemindedPrayer` dengan `try...catch` agar kebal error pada mode penyamaran ketat (strict private browsing).
   - Validasi tipe payload JSON storage untuk mencegah kerusakan state jika localStorage corrupt.
 
+#### 🔔 Sistem Notifikasi Kontekstual & Layar Pengingat Sholat Khusyuk (Serene Reminder)
+- **Banner Izin Notifikasi Kontekstual (`NotificationBanner`)**:
+  - Menyajikan tawaran izin notifikasi desktop non-intrusif saat status perizinan peramban masih `'default'`, memenuhi kepatuhan kebijakan *User Gesture* Google Chrome & modern web standards.
+- **Sinkronisasi Otomatis Izin di Pengaturan**:
+  - Mengaktifkan toggle *Notifikasi Desktop* atau *Notifikasi Pomodoro* di Pengaturan otomatis meminta izin notifikasi peramban.
+- **Layar Pengingat Sholat Khusyuk (`ReminderModal`)**:
+  - Menghadirkan layar pengingat hening dengan ayat suci Al-Qur'an (QS. An-Nisa: 103), nama sholat, dan audio chime lembut saat waktu adzan tiba (sebagai alternatif elegan yang aman dari pemblokir pop-up tab peramban).
+- **Fokus Jendela Otomatis (`notification.onclick`)**:
+  - Mengklik notifikasi desktop sistem otomatis mengembalikan fokus jendela peramban ke tab Zen Clock (`window.focus()`) dan membuka layar pengingat sholat.
+
 #### ⚡ Optimasi Performa & Zero-Lag Navigation
 - **Eliminasi Infinite Re-Render Loop**:
   - Menstabilkan hook `useLanguage` dengan `useCallback` dan `useMemo`, mencegah instansiasi ulang fungsi `setLang` pada setiap frame render.
@@ -66,6 +76,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 
   - Strict CSS HEX validation protecting `--zen-accent` against injection.
 - **Defensive Error Handling**:
   - Protected `localStorage` operations with `try/catch` and defensive JSON parsing against corrupted storage entries.
+
+#### 🔔 Contextual Notifications & Serene In-App Prayer Reminder Screen
+- **Contextual Opt-In Permission Banner (`NotificationBanner`)**:
+  - Discreet, non-intrusive notification prompt adhering to modern browser User Gesture and Chrome intervention policies.
+- **Settings Toggle Auto-Permission**:
+  - Automatically requests browser notification permission when toggling Desktop or Pomodoro notifications in Settings.
+- **Serene Prayer Reminder Overlay (`ReminderModal`)**:
+  - Displays a peaceful in-app modal with Holy Quran verse (QS. An-Nisa: 103), prayer name, and soft chime sound when adzan arrives, gracefully replacing blocked popup tabs on the web.
+- **Notification Focus Window Interaction (`notification.onclick`)**:
+  - Clicking native desktop alerts automatically focuses the Zen Clock tab and opens the serene reminder overlay.
 
 #### ⚡ Performance & Hook Stabilization
 - **Infinite Render Loop Elimination**:

@@ -9,6 +9,9 @@ import ExplorePage from './components/explore/ExplorePage';
 import ExtensionLanding from './components/ExtensionLanding';
 import BrowserLanding from './components/browser/BrowserLanding';
 import PrivacyPage from './components/privacy/PrivacyPage';
+import NotificationBanner from './components/notification/NotificationBanner';
+import ReminderModal from './components/reminder/ReminderModal';
+import { playAudioChime } from './utils/notification';
 import { Timer, Clock, Download, Settings as SettingsIcon, Maximize, Minimize, Star } from 'lucide-react';
 import { useLanguage, getTranslations } from './utils/i18n';
 import {
@@ -64,6 +67,11 @@ const resolveCurrentRoute = () => {
     return { route: 'privacy-policy' };
   }
 
+  // 5. Prayer Reminder dedicated view (/reminder or #reminder)
+  if (path.startsWith('/reminder') || hash.includes('reminder')) {
+    return { route: 'reminder' };
+  }
+
   return { route: 'app' };
 };
 
@@ -88,6 +96,7 @@ function App() {
   const [isCityPickerOpen, setIsCityPickerOpen] = useState(false);
   const [isAdjustOpen, setIsAdjustOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [activePrayerReminder, setActivePrayerReminder] = useState(null);
 
   useEffect(() => {
     const applyAccentColor = (color) => {
@@ -178,8 +187,8 @@ function App() {
         setPomodoroState(completed);
       }
 
-      // Check Prayer notification
-      if (settings.notifyPrayer !== false && settings.city) {
+      // Check Prayer notification and serene reminder screen
+      if (settings.city && (settings.notifyPrayer !== false || settings.autoOpenReminderTab !== false)) {
         const prayerCalc = calculatePrayerTimes(settings.city, now, settings.adjustments, settings.language || 'id');
         if (prayerCalc && Array.isArray(prayerCalc.allPrayers)) {
           const lastReminded = await getLastRemindedPrayer();
@@ -191,7 +200,16 @@ function App() {
             if (shouldTriggerPrayerAlert(now, prayer.date, lastReminded, reminderId)) {
               await setLastRemindedPrayer(reminderId);
 
-              if (typeof Notification !== 'undefined' && Notification.permission === 'granted') {
+              // 1. Play gentle audio chime
+              playAudioChime();
+
+              // 2. Open serene in-app prayer reminder screen (if enabled)
+              if (settings.autoOpenReminderTab !== false) {
+                setActivePrayerReminder(prayer);
+              }
+
+              // 3. Trigger native desktop notification (if enabled & permission granted)
+              if (settings.notifyPrayer !== false && typeof Notification !== 'undefined' && Notification.permission === 'granted') {
                 const isEn = settings.language === 'en';
                 const title = isEn
                   ? `🕌 Prayer Time for ${prayer.name} has arrived!`
@@ -199,7 +217,15 @@ function App() {
                 const body = isEn
                   ? `Prayer time for ${settings.city.name} and surrounding areas.`
                   : `Waktu sholat ${prayer.name} untuk wilayah ${settings.city.name} dan sekitarnya telah tiba.`;
-                new Notification(title, { body, icon: '/favicon.svg' });
+                try {
+                  const notif = new Notification(title, { body, icon: '/favicon.svg', tag: reminderId });
+                  notif.onclick = () => {
+                    window.focus();
+                    setActivePrayerReminder(prayer);
+                  };
+                } catch (e) {
+                  console.error('Notification error:', e);
+                }
               }
               break;
             }
@@ -330,8 +356,24 @@ function App() {
     );
   }
 
+  if (currentRoute === 'reminder') {
+    return (
+      <ReminderModal
+        isOpen={true}
+        prayerName={currentLang === 'en' ? 'Dhuhr' : 'Dzuhur'}
+        cityName={settings?.city?.name || 'Jakarta'}
+        language={currentLang}
+        onClose={() => navigateTo('app')}
+        onBackToClock={() => navigateTo('app')}
+      />
+    );
+  }
+
   return (
     <div className="app-container">
+      {/* Contextual Opt-In Desktop Notification Banner */}
+      <NotificationBanner language={currentLang} />
+
       {/* Viewport Hero Section (Full 100vh on Desktop - Zero Distractions) */}
       <div className="deskclock-hero-screen">
         {/* Top Header Controls Bar (Parity with DeskClockPage) */}
@@ -491,6 +533,19 @@ function App() {
         onOpenEcosystem={() => {
           setIsSettingsOpen(false);
           navigateTo('explore');
+        }}
+        onTriggerTestReminder={(testPrayer) => setActivePrayerReminder(testPrayer)}
+      />
+
+      <ReminderModal
+        isOpen={!!activePrayerReminder}
+        prayerName={activePrayerReminder?.name || (currentLang === 'en' ? 'Dhuhr' : 'Dzuhur')}
+        cityName={settings?.city?.name || 'Jakarta'}
+        language={currentLang}
+        onClose={() => setActivePrayerReminder(null)}
+        onBackToClock={() => {
+          setActivePrayerReminder(null);
+          navigateTo('app');
         }}
       />
     </div>
