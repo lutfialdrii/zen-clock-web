@@ -116,7 +116,7 @@
   align-items: center;
 }
 
-.support-badge {
+.support-hero-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -131,7 +131,7 @@
   margin-bottom: 16px;
 }
 
-.support-title {
+.support-hero-title {
   font-size: 34px;
   font-weight: 700;
   color: #ffffff;
@@ -344,7 +344,7 @@
     gap: 30px;
   }
 
-  .support-title {
+  .support-hero-title {
     font-size: 26px;
   }
 

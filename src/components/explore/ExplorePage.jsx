@@ -191,20 +191,20 @@ export default function ExplorePage({ onBackToClock, onNavigate }) {
 
       {/* Support & Community Section */}
       <section className="explore-support-section">
-        <div className="support-box">
-          <div className="support-info">
-            <h3 className="support-title">
+        <div className="explore-support-box">
+          <div className="explore-support-info">
+            <h3 className="explore-support-title">
               <Sparkles size={13} />
               <span>{t.ui?.supportCreator || 'Support the Creator'}</span>
             </h3>
-            <p className="support-desc">{t.ui?.supportCreatorDesc || 'Buy me a coffee on Saweria or Give a Star on GitHub'}</p>
+            <p className="explore-support-desc">{t.ui?.supportCreatorDesc || 'Buy me a coffee on Saweria or Give a Star on GitHub'}</p>
           </div>
-          <div className="support-actions">
+          <div className="explore-support-actions">
             <a 
               href={SAWERIA_URL} 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="support-btn saweria"
+              className="explore-support-btn saweria"
               title={t.ui?.supportSaweria || 'Saweria'}
             >
               <Heart size={15} />
@@ -215,7 +215,7 @@ export default function ExplorePage({ onBackToClock, onNavigate }) {
               href={GITHUB_REPO_URL} 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="support-btn github"
+              className="explore-support-btn github"
               title={t.ui?.supportGitHub || t.nav?.starGitHub || 'Star on GitHub'}
             >
               <Star size={15} />

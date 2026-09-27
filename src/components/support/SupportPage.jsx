@@ -73,11 +73,11 @@ export default function SupportPage({ onBackToClock, onBackToExplore, onNavigate
       <main className="support-container">
         {/* Header Hero */}
         <div className="support-header">
-          <div className="support-badge">
+          <div className="support-hero-badge">
             <HelpCircle size={14} />
             <span>{isEn ? "Help & Support Center" : "Pusat Bantuan & Dukungan Pengguna"}</span>
           </div>
-          <h1 className="support-title">
+          <h1 className="support-hero-title">
             {isEn ? "How can we help you today?" : "Ada yang bisa kami bantu?"}
           </h1>
           <p className="support-subtitle">
