@@ -55,13 +55,13 @@ export const translations = {
       adjustPrayerTimesDesc: 'Koreksi menit untuk tiap waktu sholat (Ihtiyat)',
       change: 'Ubah',
       adjust: 'Atur',
-      supportCreator: 'Dukung Pengembang',
-      supportCreatorDesc: 'Apresiasi sukarela untuk mendukung pengembangan Zen Clock',
-      supportSaweria: 'Traktir Kopi via Saweria',
-      supportSaweriaDesc: 'Dukungan donasi sukarela (GoPay, OVO, Dana, QRIS)',
-      supportGitHub: 'Beri Bintang di GitHub',
-      supportGitHubDesc: 'Bantu Zen Clock semakin berkembang dan menjangkau lebih banyak pengguna',
-      ecosystemTitle: 'Zen Clock Apps',
+      supportCreator: 'Support the Creator',
+      supportCreatorDesc: 'Buy me a coffee on Saweria or Give a Star on GitHub',
+      supportSaweria: 'Buy me a coffee on Saweria',
+      supportSaweriaDesc: 'Voluntary donation support (GoPay, OVO, Dana, QRIS)',
+      supportGitHub: 'Star on GitHub',
+      supportGitHubDesc: 'Help Zen Clock grow and reach more developers',
+      ecosystemTitle: 'Zen Clock: Pomodoro & Muslim Prayer',
       ecosystemBadge: 'Multi-Platform',
       ecosystemDesc: 'Explore Zen Clock Apps (Browser Extension, VS Code Extension & CLI)',
       ecosystemChips: 'Browser Extension · VS Code Extension · CLI · Native',
@@ -113,6 +113,31 @@ export const translations = {
       popular: 'Paling Populer',
       lightweight: 'Ultra Ringan'
     },
+    explore: {
+      tag: 'Productivity Tool',
+      title: 'Explore Zen Clock Apps',
+      subtitle: 'Dari web browser, code editor, hingga terminal. Tetap fokus dan selalu ingat waktu di mana pun Anda bekerja.',
+      webTitle: 'Zen Clock Web',
+      webBadge: 'PWA & Standalone Web',
+      webDesc: 'Jalankan Zen Flip CLock dengan reminder sholat dan Pomodoro tanpa perlu instalasi apa pun.',
+      webCta: 'Kembali ke Web →',
+      vscodeTitle: 'Zen Clock untuk VS Code',
+      vscodeBadge: 'VS Code Extension',
+      vscodeDesc: 'Jalankan Zen Flip Clock di VS Code atau IDE anda. Tetap ingat waktu walau keasikan koding',
+      vscodeCta: 'Install di VS Code →',
+      browserTitle: 'Zen Clock Browser Extension',
+      browserBadge: 'Browser Extension',
+      browserDesc: 'Quick popup di toolbar, full page flip clock, serta notifikasi secara native melalui browser.',
+      browserCta: 'Install di Browser →',
+      cliTitle: 'CLI Program (Terminal)',
+      cliBadge: 'Ultra-lightweight',
+      cliDesc: 'Zen Flip Clock berjalan di terminal anda.',
+      cliCta: 'Dalam Pengembangan (Segera Hadir)',
+      nativeTitle: 'Native Apps (Desktop & Mobile)',
+      nativeBadge: 'Flutter',
+      nativeDesc: 'Aplikasi desktop & mobile native terpadu untuk macOS, Windows, Linux, iOS, dan Android.',
+      nativeCta: 'Research & Plan'
+    },
     browser: {
       headline: 'Zen Clock, Jadwal Sholat serta Pomodoro di Browser',
       description: 'Zen Clock langsung dari toolbar. praktis, ringan, dan easy to use.',
@@ -128,7 +153,8 @@ export const translations = {
       feature2Title: 'Full Page Clock',
       feature2Desc: 'Ubah tab menjadi layar jam flip.',
       feature3Title: 'Background Notification',
-      feature3Desc: 'Notifikasi tetap berbunyi meski Anda sedang berselancar di tab lain.'
+      feature3Desc: 'Notifikasi tetap berbunyi meski Anda sedang berselancar di tab lain.',
+      readDocumentation: 'Baca Dokumentasi & Panduan di GitHub README →'
     },
     vscode: {
       headline: 'Zen Clock, Jadwal Sholat serta Pomodoro di VS Code',
@@ -142,7 +168,8 @@ export const translations = {
       feature2Title: 'True Background Engine',
       feature2Desc: 'Berjalan secara background dan state yang sama di semua mode.',
       feature3Title: 'Dedicated Reminder Notification',
-      feature3Desc: 'Otomatis menampilkan notifikasi jika waktunya telah tiba.'
+      feature3Desc: 'Otomatis menampilkan notifikasi jika waktunya telah tiba.',
+      readDocumentation: 'Baca Dokumentasi Lengkap di GitHub README →'
     },
     cli: {
       headline: 'Zen Clock, Jadwal Sholat serta Pomodoro di Terminal',
@@ -238,12 +265,12 @@ export const translations = {
       change: 'Change',
       adjust: 'Adjust',
       supportCreator: 'Support the Creator',
-      supportCreatorDesc: 'Show appreciation to support Zen Clock ongoing development',
+      supportCreatorDesc: 'Buy me a coffee on Saweria or Give a Star on GitHub',
       supportSaweria: 'Buy me a coffee on Saweria',
       supportSaweriaDesc: 'Voluntary donation support (GoPay, OVO, Dana, QRIS)',
       supportGitHub: 'Star on GitHub',
       supportGitHubDesc: 'Help Zen Clock grow and reach more developers',
-      ecosystemTitle: 'Zen Clock Apps',
+      ecosystemTitle: 'Zen Clock: Pomodoro & Muslim Prayer',
       ecosystemBadge: 'Multi-Platform',
       ecosystemDesc: 'Explore Zen Clock Apps (Browser Extension, VS Code Extension & CLI)',
       ecosystemChips: 'Browser Extension · VS Code Extension · CLI · Native',
@@ -295,6 +322,31 @@ export const translations = {
       popular: 'Most Popular',
       lightweight: 'Ultra Lightweight'
     },
+    explore: {
+      tag: 'Productivity Tool',
+      title: 'Explore Zen Clock Apps',
+      subtitle: 'From your web browser and favorite code editor to the terminal. Stay mindful, focused, and always on time for prayer wherever you work.',
+      webTitle: 'Zen Clock on Web Browser',
+      webBadge: 'PWA & Standalone Web',
+      webDesc: 'Aesthetic retro flip desk clock with prayer times, gentle chimes, and Pomodoro with zero installation required.',
+      webCta: 'Open Web Clock Now →',
+      vscodeTitle: 'Zen Clock for VS Code',
+      vscodeBadge: 'VS Code & Antigravity IDE',
+      vscodeDesc: '3D mechanical flip clock in sidebar/panel, true background Pomodoro engine, and status bar countdown.',
+      vscodeCta: 'Explore VS Code Extension →',
+      browserTitle: 'Zen Clock Browser Extension',
+      browserBadge: 'Chrome Web Store & Edge',
+      browserDesc: 'Quick toolbar popup, full page desk clock tab, and native desktop prayer time alerts.',
+      browserCta: 'Explore Browser Extension →',
+      cliTitle: 'CLI Program (Terminal)',
+      cliBadge: 'Go 1.23+ · Ultra-lightweight',
+      cliDesc: 'Aesthetic ASCII TUI flip clock and ultra-lightweight prayer schedule daemon for terminal enthusiasts.',
+      cliCta: 'In Development (Coming Soon)',
+      nativeTitle: 'Native Apps (Desktop & Mobile)',
+      nativeBadge: 'Flutter / Native Desktop',
+      nativeDesc: 'Unified native applications for macOS, Windows, Linux, iOS, and Android platforms.',
+      nativeCta: 'Research & Planning'
+    },
     browser: {
       headline: 'Zen Clock, Prayer Schedule & Pomodoro on Browser',
       description: 'Zen Clock on your toolbar with Prayer Schedule and Pomodoro. Fast, lightweight, and easy to use.',
@@ -310,7 +362,8 @@ export const translations = {
       feature2Title: 'Full Page Clock',
       feature2Desc: 'Turn your tab into an aesthetic, distraction-free flip desk clock.',
       feature3Title: 'Background Notification',
-      feature3Desc: 'Native desktop notifications sound even while browsing other tabs.'
+      feature3Desc: 'Native desktop notifications sound even while browsing other tabs.',
+      readDocumentation: 'Read Full Documentation on GitHub README →'
     },
     vscode: {
       headline: 'Zen Clock, Prayer Reminder & Pomodoro in VS Code',
@@ -324,7 +377,8 @@ export const translations = {
       feature2Title: 'True Background Engine',
       feature2Desc: 'Runs in the background with unified state across all modes.',
       feature3Title: 'Dedicated Reminder Notification',
-      feature3Desc: 'Automatically displays notifications when the time arrives.'
+      feature3Desc: 'Automatically displays notifications when the time arrives.',
+      readDocumentation: 'Read Full Documentation on GitHub README →'
     },
     cli: {
       headline: 'Zen Clock, Prayer Schedule & Pomodoro on Terminal',

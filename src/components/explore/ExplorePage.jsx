@@ -193,12 +193,11 @@ export default function ExplorePage({ onBackToClock, onNavigate }) {
       <section className="explore-support-section">
         <div className="support-box">
           <div className="support-info">
-            <div className="support-badge">
+            <h3 className="support-title">
               <Sparkles size={13} />
-              <span>Free & Open Source</span>
-            </div>
-            <h3 className="support-title">{t.settings?.supportCreator || 'Support the Creator'}</h3>
-            <p className="support-desc">{t.settings?.supportCreatorDesc || 'Show appreciation to support Zen Clock ongoing development.'}</p>
+              <span>{t.ui?.supportCreator || 'Support the Creator'}</span>
+            </h3>
+            <p className="support-desc">{t.ui?.supportCreatorDesc || 'Buy me a coffee on Saweria or Give a Star on GitHub'}</p>
           </div>
           <div className="support-actions">
             <a 
@@ -206,6 +205,7 @@ export default function ExplorePage({ onBackToClock, onNavigate }) {
               target="_blank" 
               rel="noopener noreferrer" 
               className="support-btn saweria"
+              title={t.ui?.supportSaweria || 'Saweria'}
             >
               <Heart size={15} />
               <span>Saweria</span>
@@ -216,9 +216,10 @@ export default function ExplorePage({ onBackToClock, onNavigate }) {
               target="_blank" 
               rel="noopener noreferrer" 
               className="support-btn github"
+              title={t.ui?.supportGitHub || t.nav?.starGitHub || 'Star on GitHub'}
             >
               <Star size={15} />
-              <span>Star GitHub</span>
+              <span>{t.nav?.starGitHub || 'Star GitHub'}</span>
               <ExternalLink size={12} className="ext" />
             </a>
           </div>
